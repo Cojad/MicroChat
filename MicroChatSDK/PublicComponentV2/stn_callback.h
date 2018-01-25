@@ -41,25 +41,25 @@ public:
     
     virtual bool MakesureAuthed();
     
-    //æµé‡ç»Ÿè®¡
+    //Á÷Á¿Í³¼Æ
     virtual void TrafficData(ssize_t _send, ssize_t _recv);
     
-    //åº•å±‚è¯¢é—®ä¸Šå±‚è¯¥hostå¯¹åº”çš„ipåˆ—è¡¨
+    //µ×²ãÑ¯ÎÊÉÏ²ã¸Ãhost¶ÔÓ¦µÄipÁĞ±í
     virtual std::vector<std::string> OnNewDns(const std::string& _host);
-    //ç½‘ç»œå±‚æ”¶åˆ°pushæ¶ˆæ¯å›è°ƒ
+    //ÍøÂç²ãÊÕµ½pushÏûÏ¢»Øµ÷
     virtual void OnPush(uint64_t _channel_id, uint32_t _cmdid, uint32_t _taskid, const AutoBuffer& _body, const AutoBuffer& _extend);
-    //åº•å±‚è·å–taskè¦å‘é€çš„æ•°æ®
+    //µ×²ã»ñÈ¡taskÒª·¢ËÍµÄÊı¾İ
     virtual bool Req2Buf(uint32_t _taskid, void* const _user_context, AutoBuffer& _outbuffer, AutoBuffer& _extend, int& _error_code, const int _channel_select);
-    //åº•å±‚å›åŒ…è¿”å›ç»™ä¸Šå±‚è§£æ
+    //µ×²ã»Ø°ü·µ»Ø¸øÉÏ²ã½âÎö
     virtual int Buf2Resp(uint32_t _taskid, void* const _user_context, const AutoBuffer& _inbuffer, const AutoBuffer& _extend, int& _error_code, const int _channel_select);
-    //ä»»åŠ¡æ‰§è¡Œç»“æŸ
+    //ÈÎÎñÖ´ĞĞ½áÊø
     virtual int  OnTaskEnd(uint32_t _taskid, void* const _user_context, int _error_type, int _error_code);
 
-    //ä¸ŠæŠ¥ç½‘ç»œè¿æ¥çŠ¶æ€
+    //ÉÏ±¨ÍøÂçÁ¬½Ó×´Ì¬
     virtual void ReportConnectStatus(int _status, int longlink_status);
-    //é•¿è¿ä¿¡ä»¤æ ¡éªŒ ECHECK_NOW, ECHECK_NEVER = 1, ECHECK_NEXT = 2
+    //³¤Á¬ĞÅÁîĞ£Ñé ECHECK_NOW, ECHECK_NEVER = 1, ECHECK_NEXT = 2
     virtual int  GetLonglinkIdentifyCheckBuffer(AutoBuffer& _identify_buffer, AutoBuffer& _buffer_hash, int32_t& _cmdid);
-    //é•¿è¿ä¿¡ä»¤æ ¡éªŒå›åŒ…
+    //³¤Á¬ĞÅÁîĞ£Ñé»Ø°ü
     virtual bool OnLonglinkIdentifyResponse(const AutoBuffer& _response_buffer, const AutoBuffer& _identify_buffer_hash);
     //
     virtual void RequestSync();

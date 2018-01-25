@@ -32,7 +32,10 @@
 #include "Business/AuthInfo.h"
 #include <windows.h>
 #include "Business/NewSyncCGITask.h"
+#include <urlmon.h>
 using namespace std;
+
+#pragma comment(lib,"urlmon")
 
 NetworkService& NetworkService::Instance()
 {
@@ -58,11 +61,63 @@ void NetworkService::setShortLinkDebugIP(const std::string& _ip, unsigned short 
 }
 void NetworkService::setShortLinkPort(unsigned short _port)
 {
-	mars::stn::SetShortlinkSvrAddr(_port, "");
+	string _shortip;
+
+	//使用WX自己的DNS解析长短链接地址,否则登录可能会返回-301错误
+	URLDownloadToFile(0, L"http://dns.weixin.qq.com/cgi-bin/micromsg-bin/newgetdns", L"newgetdns.txt", 0, NULL);
+	FILE *fp = fopen("newgetdns.txt", "r");
+	if (fp)
+	{
+		fseek(fp, NULL, SEEK_END);
+		int nLen = ftell(fp);
+		fseek(fp, NULL, SEEK_SET);
+		CStringA strDns;
+		fread(strDns.GetBuffer(nLen), 1, nLen, fp);
+		strDns.ReleaseBuffer();
+
+		if (-1 != strDns.Find("<domain name=\"szshort.weixin.qq.com\""))
+		{
+			int nStartIndex = strDns.Find("<domain name=\"szshort.weixin.qq.com\"");
+			nStartIndex = strDns.Find("<ip>", nStartIndex) + strlen("<ip>");
+			int nEnd = strDns.Find("</ip>", nStartIndex);
+			_shortip = strDns.Mid(nStartIndex, nEnd - nStartIndex);
+		}
+
+		fclose(fp);
+		remove("newgetdns.txt");
+	}
+	
+	mars::stn::SetShortlinkSvrAddr(_port, _shortip);
 }
 void NetworkService::setLongLinkAddress(const std::string& _ip, vector<uint16_t> &ports, const std::string& _debug_ip)
 {
-	mars::stn::SetLonglinkSvrAddr(_ip, ports, _debug_ip);
+	string _longip = _ip;
+	
+	//使用WX自己的DNS解析长短链接地址,否则登录可能会返回-301错误
+	URLDownloadToFile(0, L"http://dns.weixin.qq.com/cgi-bin/micromsg-bin/newgetdns", L"newgetdns.txt", 0, NULL);
+	FILE *fp = fopen("newgetdns.txt", "r");
+	if (fp)
+	{
+		fseek(fp, NULL, SEEK_END);
+		int nLen = ftell(fp);
+		fseek(fp, NULL, SEEK_SET);
+		CStringA strDns;
+		fread(strDns.GetBuffer(nLen), 1, nLen, fp);
+		strDns.ReleaseBuffer();
+
+		if (-1 != strDns.Find("<domain name=\"szlong.weixin.qq.com\""))
+		{
+			int nStartIndex = strDns.Find("<domain name=\"szlong.weixin.qq.com\"");
+			nStartIndex = strDns.Find("<ip>", nStartIndex) + strlen("<ip>");
+			int nEnd = strDns.Find("</ip>", nStartIndex);
+			_longip = strDns.Mid(nStartIndex, nEnd - nStartIndex);
+		}
+
+		fclose(fp);
+		remove("newgetdns.txt");
+	}
+
+	mars::stn::SetLonglinkSvrAddr(_longip, ports, _debug_ip);
 }
 
 void NetworkService::setCgiCallBack(CGICallBack callback)

@@ -96,9 +96,9 @@ void StnCallBack::ReportConnectStatus(int _status, int longlink_status) {
     
 }
 
-// synccheckï¼šé•¿é“¾æˆåŠŸåç”±ç½‘ç»œç»„ä»¶è§¦å‘
-// éœ€è¦ç»„ä»¶ç»„åŒ…ï¼Œå‘é€ä¸€ä¸ªreqè¿‡å»ï¼Œç½‘ç»œæˆåŠŸä¼šæœ‰respï¼Œä½†æ²¡æœ‰taskendï¼Œå¤„ç†äº‹åŠ¡æ—¶è¦æ³¨æ„ç½‘ç»œæ—¶åº
-// ä¸éœ€ç»„ä»¶ç»„åŒ…ï¼Œä½¿ç”¨é•¿é“¾åšä¸€ä¸ªsyncï¼Œä¸ç”¨é‡è¯•
+// synccheck£º³¤Á´³É¹¦ºóÓÉÍøÂç×é¼ş´¥·¢
+// ĞèÒª×é¼ş×é°ü£¬·¢ËÍÒ»¸öreq¹ıÈ¥£¬ÍøÂç³É¹¦»áÓĞresp£¬µ«Ã»ÓĞtaskend£¬´¦ÀíÊÂÎñÊ±Òª×¢ÒâÍøÂçÊ±Ğò
+// ²»Ğè×é¼ş×é°ü£¬Ê¹ÓÃ³¤Á´×öÒ»¸ösync£¬²»ÓÃÖØÊÔ
 int  StnCallBack::GetLonglinkIdentifyCheckBuffer(AutoBuffer& _identify_buffer, AutoBuffer& _buffer_hash, int32_t& _cmdid) {
     
     return pNetworkService.GetLonglinkIdentifyCheckBuffer(_identify_buffer, _buffer_hash, _cmdid);

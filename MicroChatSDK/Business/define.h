@@ -46,7 +46,7 @@ enum LongLinkCmdId
 #define LONGLINK_CLIENT_VER		0x01
 
 //长链接地址
-#define LONGLINK_HOST		"long.weixin.qq.com"
+#define LONGLINK_HOST		"szlong.weixin.qq.com"
 
 //长链接端口
 #define LONGLINK_PORT_443		443
@@ -54,7 +54,7 @@ enum LongLinkCmdId
 #define LONGLINK_PORT_80		80
 
 //短链接地址
-#define SHORTLINK_HOST		"short.weixin.qq.com";
+#define SHORTLINK_HOST		"szshort.weixin.qq.com";
 
 //短链接端口
 #define SHORTLINK_PORT		80
