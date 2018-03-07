@@ -1,0 +1,153 @@
+syntax = "proto2";
+
+message mmStr
+{
+	optional int32 	len 		= 1;
+	optional string str 		= 2;
+}
+
+message LoginInfo 
+{
+	optional bytes aesKey 		= 1;	//解密服务器返回封包时使用的aeskey
+	optional int32 	uin 		= 2;
+	optional string guid 		= 3;	//手机guid长度16,这里取前15字节,以'\0'结尾
+	optional int32 clientVer 	= 4;
+	optional string androidVer 	= 5;
+	optional int32 unknown 		= 6;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//登录请求--账号信息
+message ManualAuthAccountRequest 
+{
+	message AesKey 
+	{  
+		required int32  len  = 1;
+		required bytes key = 2;
+	}
+    required AesKey aes = 1;				//仅用于本次登录请求,后续通讯使用的aeskey根据服务器返回的数据做ECDH生成
+
+	message Ecdh 
+	{  
+		required int32 	 nid 	= 1;        //椭圆曲线类型
+
+		message EcdhKey 
+		{  
+			required int32  len  = 1;
+			required bytes key  = 2;       //椭圆曲线client pubkey
+		}
+		required EcdhKey ecdhKey  = 2;
+	}
+	required Ecdh   ecdh  		= 2;
+	required string userName 	= 3;
+	required string password1 	= 4;
+    required string password2 	= 5;
+}
+
+
+//登录请求--设备信息
+message ManualAuthDeviceRequest 
+{
+	optional LoginInfo login 			= 1;
+	message _Tag2 
+	{
+		optional mmStr tag1 = 1;
+		message __Tag2 
+		{
+			optional string tag1 		= 1;
+			optional string tag2 		= 2;
+			optional string tag3 		= 3;
+			optional mmStr  tag4 		= 4;
+		}
+		optional __Tag2 tag2 = 2;
+		optional mmStr 	tag3 = 3;
+		optional mmStr 	tag4 = 4;
+		optional mmStr 	tag5 = 5;
+		optional int32 	tag6 = 6;
+	}
+	optional _Tag2 tag2 				= 2;
+	optional string imei 		  		= 3;
+	optional string softInfoXml       	= 4;
+	optional int32 unknown5       		= 5;
+	optional string clientSeqID      	= 6;
+	optional string clientSeqID_sign 	= 7;
+	optional string loginDeviceName     = 8;
+	optional string deviceInfoXml 		= 9;
+	optional string language       		= 10;
+	optional string timeZone       		= 11;
+	optional int32 unknown13       		= 13;
+	optional int32 unknown14       		= 14;
+	optional string deviceBrand    		= 15;
+	optional string deviceModel    		= 16;
+	optional string osType   	   		= 17;
+	optional string realCountry    		= 18;
+	optional int32 unknown22      		= 22;
+}
+
+//登录结果
+message ManualAuthResponse {
+    message AuthResult 
+	{  
+		required int32  code  		= 1;		    //登录错误码
+		message ErrMsg 
+		{
+			optional string msg 	= 1;		    //错误信息
+		}
+		required ErrMsg err_msg =2;
+	}
+    required AuthResult result = 1;				    //登录结果
+	required int32  unifyFlag  = 2;
+	message AuthParam
+	{
+		required int32  uin    = 1;
+		
+		message Ecdh 
+		{  
+			required int32 	 nid 	= 1;
+			message EcdhKey 
+			{  
+				required int32  len  = 1;
+				optional bytes key  = 2;           //椭圆曲线server pubkey
+			}
+			optional EcdhKey ecdhKey  = 2;
+		}
+		required Ecdh   ecdh  		    = 2;
+		
+		message SessionKey
+		{
+			required int32 	 len 		 = 1;
+			optional bytes  key         = 2;       
+		}
+		required SessionKey session = 3;            //加密的sessionKey 需要使用ECDH握手后的密钥做AES解密得到最终长16字节的aeskey
+		optional bytes SmsTicket = 16;				//需要短信授权时的ticket,用于后续请求验证码以及发送验证码
+
+		optional string bindMailLoginUrl = 20;
+		optional int32 serverTime        = 22;		
+	}
+	required AuthParam authParam = 3;
+	message AccountInfo
+	{
+		optional string wxId                = 1;
+		optional string nickName            = 2;
+		optional int32  tag3                = 3;
+		optional string bindMail            = 4;
+		optional string bindMobile          = 5;
+		optional string Alias               = 6;
+		optional string tag7                = 7;
+		optional int32 status               = 8;
+		optional int32 pluginFlag           = 9;
+		optional int32 registerType         = 10;
+		optional string tag11               = 11;
+		optional int32 safeDevice           = 12;
+		optional string officialNamePinyin  = 13;
+		optional string officialNameZh      = 14;
+		optional string tag15               = 15;
+		optional string fsUrl               = 16;
+	}
+	optional AccountInfo accountInfo = 4;                   //登录成功后返回账号信息
+	
+	optional bytes dnsInfo          = 5;					//dns信息
+}
