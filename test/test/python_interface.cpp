@@ -7,6 +7,7 @@ CPython::CPython()
 	RegisterPythonFunction(MODULE_NAME_INTERFACE, FUNCTION_INITALL);
 	RegisterPythonFunction(MODULE_NAME_INTERFACE, FUNCTION_GETDNS);
 	RegisterPythonFunction(MODULE_NAME_INTERFACE, FUNCTION_LOGIN);
+	RegisterPythonFunction(MODULE_NAME_INTERFACE, FUNCTION_NEWINIT);
 }
 
 CPython::~CPython()
@@ -65,4 +66,14 @@ int CPython::Login(CStringA strUserName, CStringA strPassword)
 	}	
 
 	return nCode;
+}
+
+void CPython::NewInit()
+{
+	PyObject *pRet = CallObject(MODULE_NAME_INTERFACE, FUNCTION_NEWINIT);
+
+	if (pRet)
+	{
+		PY_FREE(pRet);
+	}
 }

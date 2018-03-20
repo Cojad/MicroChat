@@ -14,9 +14,6 @@ from Util import logger
 from google.protobuf.internal import decoder,encoder
 
 
-#随机生成16位登录包AesKey
-LoginAesKey = bytes(''.join(random.sample(string.ascii_letters + string.digits, 16)), encoding = "utf8")
-
 #获取长短链接Ip
 def GetDns():
     headers = {
@@ -53,6 +50,9 @@ def GetDns():
 
 #登录,参数为账号,密码
 def Login(name,password):
+    #随机生成16位登录包AesKey
+    login_aes_key = bytes(''.join(random.sample(string.ascii_letters + string.digits, 16)), encoding = "utf8")
+
     #生成ECC key
     if not Util.GenEcdhKey():
         logger.info('生成ECC Key失败!')
@@ -62,7 +62,7 @@ def Login(name,password):
     accountRequest = mm_pb2.ManualAuthAccountRequest(
         aes     = mm_pb2.ManualAuthAccountRequest.AesKey(
             len = 16,
-            key = LoginAesKey
+            key = login_aes_key
         ),
         ecdh    = mm_pb2.ManualAuthAccountRequest.Ecdh(
             nid = 713,
@@ -78,7 +78,7 @@ def Login(name,password):
     #protobuf组包2
     deviceRequest = mm_pb2.ManualAuthDeviceRequest(
         login = mm_pb2.LoginInfo(
-            aesKey = LoginAesKey,
+            aesKey = login_aes_key,
             uin = 0,
             guid = define.__GUID__ + '\0',          #guid以\0结尾
             clientVer = define.__CLIENT_VERSION__,
@@ -109,7 +109,7 @@ def Login(name,password):
 
     #加密
     reqAccount = Util.compress_and_rsa(accountRequest.SerializeToString())
-    reqDevice  = Util.compress_and_aes(deviceRequest.SerializeToString(),LoginAesKey)
+    reqDevice  = Util.compress_and_aes(deviceRequest.SerializeToString(),login_aes_key)
 
     logger.debug("加密后数据长度:reqAccount={},reqDevice={}".format(len(reqAccount),len(reqDevice[0])))
     logger.debug("加密后reqAccount数据:" + str(reqAccount))
@@ -148,7 +148,7 @@ def Login(name,password):
     #解包
     loginRes = mm_pb2.ManualAuthResponse()
     loginRes.result.code = -1
-    loginRes.ParseFromString(Util.UnPack(loginRetBytes,LoginAesKey))
+    loginRes.ParseFromString(Util.UnPack(loginRetBytes,login_aes_key))
      
     #登录异常处理
     if -301 == loginRes.result.code:                        #DNS解析失败,请尝试更换idc
@@ -166,19 +166,69 @@ def Login(name,password):
         #保存uin/wxid
         Util.uin = loginRes.authParam.uin
         Util.wxid = loginRes.accountInfo.wxId
-        logger.info('登陆成功!\nuin:{}\nwxid:{}\nnickName:{}\nalias:{}'.format(Util.uin,Util.wxid,loginRes.accountInfo.nickName,loginRes.accountInfo.Alias))
+        logger.info('登陆成功!\nsession_key:{}\nuin:{}\nwxid:{}\nnickName:{}\nalias:{}'.format(Util.sessionKey,Util.uin,Util.wxid,loginRes.accountInfo.nickName,loginRes.accountInfo.Alias))
 
     return loginRes.result.code
+
+#首次登录设备初始化
+def new_init():
+    #protobuf组包
+    new_init_request = mm_pb2.NewInitRequest(
+        login = mm_pb2.LoginInfo(
+            aesKey =  Util.sessionKey,
+            uin = 0,
+            guid = define.__GUID__ + '\0',          #guid以\0结尾
+            clientVer = define.__CLIENT_VERSION__,
+            androidVer = define.__ANDROID_VER__,
+            unknown = 1,
+        ),
+        wxid = Util.wxid,
+        tag3 = mm_pb2.mmStr(),
+        tag4 = mm_pb2.mmStr(),
+        language = define.__LANGUAGE__,
+    )
+    #组包
+    send_data = Util.pack(new_init_request.SerializeToString(),139)
+
+    #发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/newinit',send_data)
+    logger.debug('返回数据:' + str(ret_bytes))
+
+    #解包
+    res = mm_pb2.NewInitResponse()
+    res.ParseFromString(Util.UnPack(ret_bytes))
+
+    #newinit后保存sync key
+    Util.sync_key = res.synckeybytes.key
+    logger.debug('sync key len:{}\ndata:{}'.format(res.synckeybytes.len, Util.b2hex(res.synckeybytes.key)))
+
+    #初始化数据
+    logger.debug('tag7数量:{}'.format(res.cntList))
+
+    #未读消息
+    for i in range(res.cntList):
+        if 5 == res.tag7[i].type:                           #未读消息
+            msg = mm_pb2.Msg()
+            msg.ParseFromString(res.tag7[i].data.data)
+            if 10002 == msg.type or 9999 == msg.type:       #过滤系统垃圾消息
+                continue
+            else:
+                logger.info('收到新消息:\ncreate utc time:{}\ntype:{}\nfrom:{}\nto:{}\nraw data:{}\nxml data:{}'.format(msg.createTime, msg.type, msg.from_id.id, msg.to_id.id, msg.raw.content, msg.xmlContent))
+    
+    return
 
 #初始化python模块    
 def InitAll():
     Util.initLog()
     Util.ip = GetDns()
 
+
 """
 #登录测试
 if __name__ == "__main__":
     InitAll()
-    Login('13112345678','123456')
+    if not Login('13112345678','123456'):
+        #首次登录初始化
+        new_init()
 """
 

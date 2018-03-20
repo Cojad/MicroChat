@@ -28,7 +28,10 @@ void Login()
 	szPassword[nLenPwd] = 0;
 	printf("\n");
 
-	pPython->Login(szUserName, szPassword);
+	if (!pPython->Login(szUserName, szPassword))
+	{
+		pPython->NewInit();
+	}
 }
 
 int main()

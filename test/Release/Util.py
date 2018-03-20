@@ -39,11 +39,17 @@ EcdhPubKey = b''
 #session key(封包解密时的aes key/iv)
 sessionKey = b''
 
+#cookie(登陆成功后返回,通常长15字节)
+cookie = b''
+
 #uin
 uin = 0
 
 #wxid
 wxid = ''
+
+#sync key(每次同步消息成功后刷新)
+sync_key = b''
 
 ########################################################################
 
@@ -119,12 +125,15 @@ def mmPost(cgi,data):
     return response
 
 #解包
-def UnPack(src,key):
+def UnPack(src,key = b''):
+    global cookie
     if len(src) < 20:
         return b''
+    if not key:
+        key = sessionKey
     #解析包头   
     nCur= 0
-    if src[nCur] == '\xbf':
+    if src[nCur] == struct.unpack('>B',b'\xbf')[0]:
         nCur += 1                                                         #跳过协议标志位
     nLenHeader = src[nCur] >> 2                                           #包头长度
     bUseCompressed = (src[nCur] & 0x3 == 1)                               #包体是否使用压缩算法:01使用,02不使用
@@ -135,7 +144,9 @@ def UnPack(src,key):
     nCur += 4                                                             #服务器版本(当前固定返回4字节0)
     uin= struct.unpack('>I',src[nCur:nCur+4])[0]                          #uin
     nCur += 4
-    cookie = src[nCur:nCur+nLenCookie]                                    #cookie
+    cookie_temp = src[nCur:nCur+nLenCookie]                               #cookie
+    if cookie_temp and not(cookie_temp == cookie):
+        cookie = cookie_temp                                              #刷新cookie
     nCur += nLenCookie
     (nCgi,nCur) = decoder._DecodeVarint(src,nCur)                         #cgi type
     (nLenProtobuf,nCur) = decoder._DecodeVarint(src,nCur)                 #压缩前protobuf长度
@@ -149,6 +160,36 @@ def UnPack(src,key):
         protobufData = aesDecrypt(body,key)
     logger.debug('解密后数据:%s' % str(protobufData))
     return protobufData
+
+#组包(压缩加密+封包),参数:protobuf序列化后数据,cgi类型,是否使用压缩算法
+def pack(src,cgi_type,use_compress = 0):
+    #必要参数合法性判定
+    if not cookie or not uin or not sessionKey:
+        return b''
+    #压缩加密
+    len_proto_compressed = len(src)
+    if use_compress:
+        (body,len_proto_compressed) = compress_and_aes(src,sessionKey)
+    else:
+        body = aes(src,sessionKey)
+    logger.debug("cgi:{},protobuf数据:{}\n加密后数据:{}".format(cgi_type,str(src),str(body))) 
+    #封包包头
+    header = bytearray(0)
+    header += b'\xbf'                                                               #标志位(可忽略该字节)
+    header += bytes([0])                                                            #最后2bit：02--包体不使用压缩算法;前6bit:包头长度,最后计算                                       #
+    header += bytes([((0x5<<4) + 0xf)])                                             #05:AES加密算法  0xf:cookie长度(默认使用15字节长的cookie)
+    header += struct.pack(">I",define.__CLIENT_VERSION__)                           #客户端版本号 网络字节序
+    header += struct.pack(">I",uin)                                                 #uin
+    header += cookie                                                                #coockie
+    header += encoder._VarintBytes(cgi_type)                                        #cgi type
+    header += encoder._VarintBytes(len(src))                                        #body proto压缩前长度
+    header += encoder._VarintBytes(len_proto_compressed)                            #body proto压缩后长度
+    header += bytes([0]*15)                                                         #3个未知变长整数参数,共15字节
+    header[1] = (len(header)<<2) + 2                                                #包头长度
+    logger.debug("包头数据:{}".format(str(header)))
+    #组包
+    senddata = header + body
+    return senddata
 
 #退出程序
 def ExitProcess():
@@ -168,24 +209,22 @@ def GenEcdhKey():
     lib = loader("./ecdh.dll")   
     #申请内存
     priKey = bytes(bytearray(2048))         #存放本地DH私钥
-    pubKey = bytes(bytearray(2048))         #存放本地DH公钥
-    lenPri = bytes(bytearray(4))            #存放本地DH私钥长度
-    lenPub = bytes(bytearray(4))            #存放本地DH公钥长度
+    pubKey = bytes(bytearray(2048))         #存放本地DH公钥           
+    lenPri      = c_int(0)                  #存放本地DH私钥长度
+    lenPub      = c_int(0)                  #存放本地DH公钥长度
     #转成c指针传参
-    pri = c_char_p(priKey)
-    pub = c_char_p(pubKey)
-    pLenPri = c_char_p(lenPri)
-    pLenPub = c_char_p(lenPub)
+    pri         = c_char_p(priKey)
+    pub         = c_char_p(pubKey)
+    pLenPri     = pointer(lenPri)
+    pLenPub     = pointer(lenPub)
     #secp224r1 ECC算法
     nid = 713
     #c函数原型:bool GenEcdh(int nid, unsigned char *szPriKey, int *pLenPri, unsigned char *szPubKey, int *pLenPub);
     bRet = lib.GenEcdh(nid, pri, pLenPri, pub, pLenPub)
     if bRet:
         #从c指针取结果
-        lenPri = struct.unpack('<I',lenPri)[0]
-        lenPub = struct.unpack('<I',lenPub)[0]
-        EcdhPriKey = priKey[:lenPri]
-        EcdhPubKey = pubKey[:lenPub]
+        EcdhPriKey = priKey[:lenPri.value]
+        EcdhPubKey = pubKey[:lenPub.value]
     return bRet
 
 #密钥协商
@@ -196,10 +235,10 @@ def DoEcdh(serverEcdhPubKey):
     lib = loader("./ecdh.dll")
     #申请内存
     shareKey = bytes(bytearray(2048))           #存放密钥协商结果
-    lenShareKey = bytes(bytearray(4))           #存放共享密钥长度
+    lenShareKey = c_int(0)                      #存放共享密钥长度
     #转成c指针传参
     pShareKey = c_char_p(shareKey)
-    pLenShareKey = c_char_p(lenShareKey)
+    pLenShareKey = pointer(lenShareKey)
     pri = c_char_p(EcdhPriKey)
     pub = c_char_p(serverEcdhPubKey)
     #secp224r1 ECC算法
@@ -208,9 +247,9 @@ def DoEcdh(serverEcdhPubKey):
     bRet = lib.DoEcdh(nid, pub, len(serverEcdhPubKey), pri, len(EcdhPriKey), pShareKey, pLenShareKey)
     if bRet:
         #从c指针取结果
-        lenShareKey = struct.unpack('<I',lenShareKey)[0]
-        EcdhShareKey = shareKey[:lenShareKey]
+        EcdhShareKey = shareKey[:lenShareKey.value]
     return EcdhShareKey
 
-
+#bytes转hex输出
+b2hex = lambda s : ''.join([ "%02X " % x for x in s ]).strip()
 
