@@ -8,8 +8,6 @@ CPython::CPython()
 	RegisterPythonFunction(MODULE_NAME_INTERFACE, FUNCTION_GETDNS);
 	RegisterPythonFunction(MODULE_NAME_INTERFACE, FUNCTION_LOGIN);
 	RegisterPythonFunction(MODULE_NAME_INTERFACE, FUNCTION_NEWINIT);
-	ImportModule(MODULE_NAME_MAIN);
-	RegisterPythonFunction(MODULE_NAME_MAIN, FUNCTION_START);
 }
 
 CPython::~CPython()
@@ -73,16 +71,6 @@ int CPython::Login(CStringA strUserName, CStringA strPassword)
 void CPython::NewInit()
 {
 	PyObject *pRet = CallObject(MODULE_NAME_INTERFACE, FUNCTION_NEWINIT);
-
-	if (pRet)
-	{
-		PY_FREE(pRet);
-	}
-}
-
-void CPython::Start(CStringA strUserName, CStringA strPassword)
-{
-	PyObject *pRet = CallObject(MODULE_NAME_MAIN, FUNCTION_START, "(s,s)", strUserName, strPassword);
 
 	if (pRet)
 	{

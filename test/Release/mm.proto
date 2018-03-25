@@ -16,6 +16,62 @@ message LoginInfo
 	optional int32 unknown 		= 6;
 }
 
+//同步key(该数据通常不需要解析,每次同步消息服务器会返回最新的完整的synckey,二进制保存即可;下次同步消息时直接使用)
+message SyncKey
+{
+	optional int32  len 					= 1;				//MsgKey总长度
+	message MsgKey 
+	{
+		optional int32  cnt 			= 1;					//消息类型数量
+		message Key 
+		{
+			optional int32  type = 1;							//消息类型
+			optional int64  key  = 2;							//服务器消息id(通常每个消息加1,但不是从0开始)
+		}
+		repeated Key key 				= 2;					//每种消息类型都有单独的synckey
+	}
+	optional MsgKey msgkey          		=2;					//synckey
+}
+
+//同步消息
+message common_msg
+{
+		optional int32  type 		= 1;						//消息类型:1==>个人信息,2==>最近联系人数据,5==>服务器上未读取的最新消息,其余消息类型暂未知
+		message Data
+		{
+			optional int32 len 		= 1;
+			optional bytes data 	= 2;
+		}
+		optional Data data 			= 2;
+}
+
+//服务器返回消息(newinit/newsync)
+message Msg
+{
+	optional int64 serverid 		= 1;
+	message Wxid
+	{
+		optional string id = 1;
+	}
+	optional Wxid from_id 			= 2;							//发送方wxid
+	optional Wxid to_id 			= 3;							//接收方wxid
+	optional int32 type 			= 4;							//消息类型:9999==>系统垃圾消息,10002==>sysmsg(系统垃圾消息),49==>appmsg,1==>文字消息
+	message RawContent
+	{
+		optional string content = 1;
+	}
+	optional RawContent raw 		= 5;							//原始消息内容,需要根据不同消息类型解析
+	optional int32 status 			= 6;
+	optional int32 tag7 			= 7;
+	optional bytes tag8 			= 8;
+	optional int32 createTime 		= 9;							//消息发送时间
+	optional string anticlient 		= 10;
+	optional string xmlContent 		= 11;							//推送内容(xml格式)
+	optional int64 svrId 			= 12;
+	optional int32 msgKey 			= 13;							//sync key中的id
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -163,74 +219,46 @@ message NewInitRequest
 	optional string language 				= 5;
 }
 
-//同步key(该数据通常不需要解析,每次同步消息服务器会返回最新的完整的synckey,二进制保存即可;下次同步消息时直接使用)
-message SyncKey
-{
-	optional int32  len 					= 1;				//MsgKey总长度
-	message MsgKey 
-	{
-		optional int32  cnt 			= 1;					//消息类型数量
-		message Key 
-		{
-			optional int32  type = 1;							//消息类型
-			optional int64  key  = 2;							//服务器消息id(通常每个消息加1,但不是从0开始)
-		}
-		repeated Key key 				= 2;					//每种消息类型都有单独的synckey
-	}
-	optional MsgKey msgkey          		=2;					//synckey
-}
-
-//同步key(不需要解析特定类型消息synckey时使用)
-message SyncKeyBytes
-{
-	optional int32  len 					= 1;				//MsgKey总长度
-	optional bytes  key						= 2;				//synckey二进制数据
-}
-
 //新设备第一次登录初始化服务器响应
 message NewInitResponse 
 {
 	optional string tag1 					= 1;
-	optional SyncKeyBytes synckeybytes		= 2;				//synckey二进制数据
-	optional SyncKey synckey				= 3;				//与SyncKeyBytes数据相同
+	optional bytes sync_key					= 2;				//synckey二进制数据
+	optional bytes sync_key2				= 3;				//与sync_key数据相同
 	optional int32  cntList 				= 6;				//tag7结构体数量
-	message Tag7
-	{
-		optional int32  type 		= 1;						//消息类型:1==>个人信息,2==>最近联系人数据,5==>服务器上未读取的最新消息,其余消息类型暂未知
-		message Data
-		{
-			optional int32 len 		= 1;
-			optional bytes data 	= 2;
-		}
-		optional Data data 			= 2;
-	}
-	repeated Tag7 tag7 			    		= 7;				//需要根据消息类型解析
+	repeated common_msg tag7 			    = 7;				//需要根据消息类型解析
 }
 
-//服务器返回消息(newinit/newsync)
-message Msg
+//同步消息
+message new_sync_req
 {
-	optional int64 serverid 		= 1;
-	message Wxid
+	message continue_flag
 	{
-		optional string id = 1;
+		optional int32 flag 	= 1;			
 	}
-	optional Wxid from_id 			= 2;							//发送方wxid
-	optional Wxid to_id 			= 3;							//接收方wxid
-	optional int32 type 			= 4;							//消息类型:9999==>系统垃圾消息,10002==>sysmsg(系统垃圾消息),49==>appmsg,1==>文字消息
-	message RawContent
+	optional continue_flag  flag  		= 1;						//unknown,must be 0
+	optional int32 selector 			= 2;						//unknown,just set 7
+	optional bytes sync_Key     		= 3;						//同步成功后服务器返回的消息id
+	optional int32  scene 				= 4;						//unkown,just set 3
+	optional string device 				= 5;						//'android-22'	
+	optional int32  sync_msg_digest 	= 6;						//unknown,just set 1
+}
+
+//同步消息响应
+message new_sync_resp
+{
+	optional int32 tag1 				= 1;
+	message new_msg
 	{
-		optional string content = 1;
+		optional int32  cntList 	= 1;							//tag2结构体数量
+		repeated common_msg tag2 	= 2;							//需要根据消息类型解析
 	}
-	optional RawContent raw 		= 5;							//原始消息内容,需要根据不同消息类型解析
-	optional int32 status 			= 6;
-	optional int32 tag7 			= 7;
-	optional bytes tag8 			= 8;
-	optional int32 createTime 		= 9;							//消息发送时间
-	optional string anticlient 		= 10;
-	optional string xmlContent 		= 11;							//xml格式消息内容
-	optional int64 svrId 			= 12;
-	optional int32 msgKey 			= 13;							//sync key中的id
+	optional new_msg msg 				= 2;						//未读消息
+	optional int32  tag3 				= 3;
+	optional bytes sync_key 			= 4;						//服务器返回的sync key
+	optional int32  tag5 				= 5;
+	optional int32  tag6 				= 6;
+	optional int32  utc 				= 7;
 }
 
 

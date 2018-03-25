@@ -8,6 +8,7 @@ import os,sys
 import webbrowser
 import ctypes
 import subprocess
+import sqlite3
 import define
 from Crypto.Cipher import AES
 from Crypto.PublicKey import RSA
@@ -48,8 +49,9 @@ uin = 0
 #wxid
 wxid = ''
 
-#sync key(每次同步消息成功后刷新)
-sync_key = b''
+#sqlite3数据库
+conn = None
+
 
 ########################################################################
 
@@ -127,7 +129,8 @@ def mmPost(cgi,data):
 #解包
 def UnPack(src,key = b''):
     global cookie
-    if len(src) < 20:
+    if len(src) < 0x20:
+        raise RuntimeError('Unpack Error!Please check mm protocol!')     #协议需要更新
         return b''
     if not key:
         key = sessionKey
@@ -142,7 +145,7 @@ def UnPack(src,key = b''):
     nLenCookie = src[nCur] & 0xf                                          #cookie长度
     nCur += 1
     nCur += 4                                                             #服务器版本(当前固定返回4字节0)
-    uin= struct.unpack('>I',src[nCur:nCur+4])[0]                          #uin
+    uin= struct.unpack('>i',src[nCur:nCur+4])[0]                          #uin
     nCur += 4
     cookie_temp = src[nCur:nCur+nLenCookie]                               #cookie
     if cookie_temp and not(cookie_temp == cookie):
@@ -172,21 +175,21 @@ def pack(src,cgi_type,use_compress = 0):
         (body,len_proto_compressed) = compress_and_aes(src,sessionKey)
     else:
         body = aes(src,sessionKey)
-    logger.debug("cgi:{},protobuf数据:{}\n加密后数据:{}".format(cgi_type,str(src),str(body))) 
+    logger.debug("cgi:{},protobuf数据:{}\n加密后数据:{}".format(cgi_type,b2hex(src),b2hex(body))) 
     #封包包头
     header = bytearray(0)
     header += b'\xbf'                                                               #标志位(可忽略该字节)
     header += bytes([0])                                                            #最后2bit：02--包体不使用压缩算法;前6bit:包头长度,最后计算                                       #
     header += bytes([((0x5<<4) + 0xf)])                                             #05:AES加密算法  0xf:cookie长度(默认使用15字节长的cookie)
     header += struct.pack(">I",define.__CLIENT_VERSION__)                           #客户端版本号 网络字节序
-    header += struct.pack(">I",uin)                                                 #uin
+    header += struct.pack(">i",uin)                                                 #uin
     header += cookie                                                                #coockie
     header += encoder._VarintBytes(cgi_type)                                        #cgi type
     header += encoder._VarintBytes(len(src))                                        #body proto压缩前长度
     header += encoder._VarintBytes(len_proto_compressed)                            #body proto压缩后长度
     header += bytes([0]*15)                                                         #3个未知变长整数参数,共15字节
     header[1] = (len(header)<<2) + 2                                                #包头长度
-    logger.debug("包头数据:{}".format(str(header)))
+    logger.debug("包头数据:{}".format(b2hex(header)))
     #组包
     senddata = header + body
     return senddata
@@ -253,3 +256,49 @@ def DoEcdh(serverEcdhPubKey):
 #bytes转hex输出
 b2hex = lambda s : ''.join([ "%02X " % x for x in s ]).strip()
 
+#sqlite3数据库初始化
+def init_db():
+    global conn
+    #建库
+    conn = sqlite3.connect('mm_{}.db'.format(wxid))
+    cur = conn.cursor()
+    #建消息表
+    cur.execute('create table if not exists msg(svrid bigint unique,utc integer,createtime varchar(1024),fromWxid varchar(1024),toWxid varchar(1024),type integer,content text(65535))')
+    #建sync key表
+    cur.execute('create table if not exists synckey(key varchar(4096))')
+    return
+
+#获取sync key
+def get_sync_key():
+    cur = conn.cursor()
+    cur.execute('select * from synckey')
+    row = cur.fetchone()
+    if row:
+        return bytes.fromhex(row[0])       
+    return b''
+
+#刷新sync key
+def set_sync_key(key):
+    cur = conn.cursor()
+    cur.execute('delete from synckey')
+    cur.execute('insert into synckey(key) values("{}")'.format(b2hex(key)))
+    conn.commit()
+    return
+
+#保存消息
+def insert_msg_to_db(svrid,utc,from_wxid,to_wxid,type,content):
+    cur = conn.cursor()
+    try:
+        cur.execute("insert into msg(svrid,utc,createtime,fromWxid,toWxid,type,content) values('{}','{}','{}','{}','{}','{}','{}')".format(svrid,utc,utc_to_local_time(utc),from_wxid,to_wxid,type,content))
+        conn.commit()
+    except:
+        logger.info('insert_msg_to_db error!')
+    return    
+
+#utc转本地时间
+def utc_to_local_time(utc):
+    return time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(utc))
+
+#获取本地时间
+def get_utc():
+    return int(time.time())

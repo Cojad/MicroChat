@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='mm.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x08mm.proto\"!\n\x05mmStr\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0b\n\x03str\x18\x02 \x01(\t\"n\n\tLoginInfo\x12\x0e\n\x06\x61\x65sKey\x18\x01 \x01(\x0c\x12\x0b\n\x03uin\x18\x02 \x01(\x05\x12\x0c\n\x04guid\x18\x03 \x01(\t\x12\x11\n\tclientVer\x18\x04 \x01(\x05\x12\x12\n\nandroidVer\x18\x05 \x01(\t\x12\x0f\n\x07unknown\x18\x06 \x01(\x05\"\xc6\x02\n\x18ManualAuthAccountRequest\x12-\n\x03\x61\x65s\x18\x01 \x02(\x0b\x32 .ManualAuthAccountRequest.AesKey\x12,\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\x1e.ManualAuthAccountRequest.Ecdh\x12\x10\n\x08userName\x18\x03 \x02(\t\x12\x11\n\tpassword1\x18\x04 \x02(\t\x12\x11\n\tpassword2\x18\x05 \x02(\t\x1a\"\n\x06\x41\x65sKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\x1aq\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12\x37\n\x07\x65\x63\x64hKey\x18\x02 \x02(\x0b\x32&.ManualAuthAccountRequest.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\"\x91\x05\n\x17ManualAuthDeviceRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12,\n\x04tag2\x18\x02 \x01(\x0b\x32\x1e.ManualAuthDeviceRequest._Tag2\x12\x0c\n\x04imei\x18\x03 \x01(\t\x12\x13\n\x0bsoftInfoXml\x18\x04 \x01(\t\x12\x10\n\x08unknown5\x18\x05 \x01(\x05\x12\x13\n\x0b\x63lientSeqID\x18\x06 \x01(\t\x12\x18\n\x10\x63lientSeqID_sign\x18\x07 \x01(\t\x12\x17\n\x0floginDeviceName\x18\x08 \x01(\t\x12\x15\n\rdeviceInfoXml\x18\t \x01(\t\x12\x10\n\x08language\x18\n \x01(\t\x12\x10\n\x08timeZone\x18\x0b \x01(\t\x12\x11\n\tunknown13\x18\r \x01(\x05\x12\x11\n\tunknown14\x18\x0e \x01(\x05\x12\x13\n\x0b\x64\x65viceBrand\x18\x0f \x01(\t\x12\x13\n\x0b\x64\x65viceModel\x18\x10 \x01(\t\x12\x0e\n\x06osType\x18\x11 \x01(\t\x12\x13\n\x0brealCountry\x18\x12 \x01(\t\x12\x11\n\tunknown22\x18\x16 \x01(\x05\x1a\xec\x01\n\x05_Tag2\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x33\n\x04tag2\x18\x02 \x01(\x0b\x32%.ManualAuthDeviceRequest._Tag2.__Tag2\x12\x14\n\x04tag3\x18\x03 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag5\x18\x05 \x01(\x0b\x32\x06.mmStr\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x1aH\n\x06__Tag2\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\t\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xd3\x07\n\x12ManualAuthResponse\x12.\n\x06result\x18\x01 \x02(\x0b\x32\x1e.ManualAuthResponse.AuthResult\x12\x11\n\tunifyFlag\x18\x02 \x02(\x05\x12\x30\n\tauthParam\x18\x03 \x02(\x0b\x32\x1d.ManualAuthResponse.AuthParam\x12\x34\n\x0b\x61\x63\x63ountInfo\x18\x04 \x01(\x0b\x32\x1f.ManualAuthResponse.AccountInfo\x12\x0f\n\x07\x64nsInfo\x18\x05 \x01(\x0c\x1ai\n\nAuthResult\x12\x0c\n\x04\x63ode\x18\x01 \x02(\x05\x12\x36\n\x07\x65rr_msg\x18\x02 \x02(\x0b\x32%.ManualAuthResponse.AuthResult.ErrMsg\x1a\x15\n\x06\x45rrMsg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a\xe5\x02\n\tAuthParam\x12\x0b\n\x03uin\x18\x01 \x02(\x05\x12\x30\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\".ManualAuthResponse.AuthParam.Ecdh\x12\x39\n\x07session\x18\x03 \x02(\x0b\x32(.ManualAuthResponse.AuthParam.SessionKey\x12\x11\n\tSmsTicket\x18\x10 \x01(\x0c\x12\x18\n\x10\x62indMailLoginUrl\x18\x14 \x01(\t\x12\x12\n\nserverTime\x18\x16 \x01(\x05\x1au\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12;\n\x07\x65\x63\x64hKey\x18\x02 \x01(\x0b\x32*.ManualAuthResponse.AuthParam.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a&\n\nSessionKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a\xad\x02\n\x0b\x41\x63\x63ountInfo\x12\x0c\n\x04wxId\x18\x01 \x01(\t\x12\x10\n\x08nickName\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08\x62indMail\x18\x04 \x01(\t\x12\x12\n\nbindMobile\x18\x05 \x01(\t\x12\r\n\x05\x41lias\x18\x06 \x01(\t\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x0e\n\x06status\x18\x08 \x01(\x05\x12\x12\n\npluginFlag\x18\t \x01(\x05\x12\x14\n\x0cregisterType\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\t\x12\x12\n\nsafeDevice\x18\x0c \x01(\x05\x12\x1a\n\x12officialNamePinyin\x18\r \x01(\t\x12\x16\n\x0eofficialNameZh\x18\x0e \x01(\t\x12\r\n\x05tag15\x18\x0f \x01(\t\x12\r\n\x05\x66sUrl\x18\x10 \x01(\t\"w\n\x0eNewInitRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04wxid\x18\x02 \x01(\t\x12\x14\n\x04tag3\x18\x03 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x12\x10\n\x08language\x18\x05 \x01(\t\"\x92\x01\n\x07SyncKey\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x1f\n\x06msgkey\x18\x02 \x01(\x0b\x32\x0f.SyncKey.MsgKey\x1aY\n\x06MsgKey\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12 \n\x03key\x18\x02 \x03(\x0b\x32\x13.SyncKey.MsgKey.Key\x1a \n\x03Key\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x03\"(\n\x0cSyncKeyBytes\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\"\xf8\x01\n\x0fNewInitResponse\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12#\n\x0csynckeybytes\x18\x02 \x01(\x0b\x32\r.SyncKeyBytes\x12\x19\n\x07synckey\x18\x03 \x01(\x0b\x32\x08.SyncKey\x12\x0f\n\x07\x63ntList\x18\x06 \x01(\x05\x12#\n\x04tag7\x18\x07 \x03(\x0b\x32\x15.NewInitResponse.Tag7\x1a\x61\n\x04Tag7\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12(\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x1a.NewInitResponse.Tag7.Data\x1a!\n\x04\x44\x61ta\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\xb3\x02\n\x03Msg\x12\x10\n\x08serverid\x18\x01 \x01(\x03\x12\x1a\n\x07\x66rom_id\x18\x02 \x01(\x0b\x32\t.Msg.Wxid\x12\x18\n\x05to_id\x18\x03 \x01(\x0b\x32\t.Msg.Wxid\x12\x0c\n\x04type\x18\x04 \x01(\x05\x12\x1c\n\x03raw\x18\x05 \x01(\x0b\x32\x0f.Msg.RawContent\x12\x0e\n\x06status\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x0c\x12\x12\n\ncreateTime\x18\t \x01(\x05\x12\x12\n\nanticlient\x18\n \x01(\t\x12\x12\n\nxmlContent\x18\x0b \x01(\t\x12\r\n\x05svrId\x18\x0c \x01(\x03\x12\x0e\n\x06msgKey\x18\r \x01(\x05\x1a\x12\n\x04Wxid\x12\n\n\x02id\x18\x01 \x01(\t\x1a\x1d\n\nRawContent\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t')
+  serialized_pb=_b('\n\x08mm.proto\"!\n\x05mmStr\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0b\n\x03str\x18\x02 \x01(\t\"n\n\tLoginInfo\x12\x0e\n\x06\x61\x65sKey\x18\x01 \x01(\x0c\x12\x0b\n\x03uin\x18\x02 \x01(\x05\x12\x0c\n\x04guid\x18\x03 \x01(\t\x12\x11\n\tclientVer\x18\x04 \x01(\x05\x12\x12\n\nandroidVer\x18\x05 \x01(\t\x12\x0f\n\x07unknown\x18\x06 \x01(\x05\"\x92\x01\n\x07SyncKey\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x1f\n\x06msgkey\x18\x02 \x01(\x0b\x32\x0f.SyncKey.MsgKey\x1aY\n\x06MsgKey\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12 \n\x03key\x18\x02 \x03(\x0b\x32\x13.SyncKey.MsgKey.Key\x1a \n\x03Key\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x03\"]\n\ncommon_msg\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x1e\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x10.common_msg.Data\x1a!\n\x04\x44\x61ta\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\xb3\x02\n\x03Msg\x12\x10\n\x08serverid\x18\x01 \x01(\x03\x12\x1a\n\x07\x66rom_id\x18\x02 \x01(\x0b\x32\t.Msg.Wxid\x12\x18\n\x05to_id\x18\x03 \x01(\x0b\x32\t.Msg.Wxid\x12\x0c\n\x04type\x18\x04 \x01(\x05\x12\x1c\n\x03raw\x18\x05 \x01(\x0b\x32\x0f.Msg.RawContent\x12\x0e\n\x06status\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x0c\x12\x12\n\ncreateTime\x18\t \x01(\x05\x12\x12\n\nanticlient\x18\n \x01(\t\x12\x12\n\nxmlContent\x18\x0b \x01(\t\x12\r\n\x05svrId\x18\x0c \x01(\x03\x12\x0e\n\x06msgKey\x18\r \x01(\x05\x1a\x12\n\x04Wxid\x12\n\n\x02id\x18\x01 \x01(\t\x1a\x1d\n\nRawContent\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t\"\xc6\x02\n\x18ManualAuthAccountRequest\x12-\n\x03\x61\x65s\x18\x01 \x02(\x0b\x32 .ManualAuthAccountRequest.AesKey\x12,\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\x1e.ManualAuthAccountRequest.Ecdh\x12\x10\n\x08userName\x18\x03 \x02(\t\x12\x11\n\tpassword1\x18\x04 \x02(\t\x12\x11\n\tpassword2\x18\x05 \x02(\t\x1a\"\n\x06\x41\x65sKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\x1aq\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12\x37\n\x07\x65\x63\x64hKey\x18\x02 \x02(\x0b\x32&.ManualAuthAccountRequest.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\"\x91\x05\n\x17ManualAuthDeviceRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12,\n\x04tag2\x18\x02 \x01(\x0b\x32\x1e.ManualAuthDeviceRequest._Tag2\x12\x0c\n\x04imei\x18\x03 \x01(\t\x12\x13\n\x0bsoftInfoXml\x18\x04 \x01(\t\x12\x10\n\x08unknown5\x18\x05 \x01(\x05\x12\x13\n\x0b\x63lientSeqID\x18\x06 \x01(\t\x12\x18\n\x10\x63lientSeqID_sign\x18\x07 \x01(\t\x12\x17\n\x0floginDeviceName\x18\x08 \x01(\t\x12\x15\n\rdeviceInfoXml\x18\t \x01(\t\x12\x10\n\x08language\x18\n \x01(\t\x12\x10\n\x08timeZone\x18\x0b \x01(\t\x12\x11\n\tunknown13\x18\r \x01(\x05\x12\x11\n\tunknown14\x18\x0e \x01(\x05\x12\x13\n\x0b\x64\x65viceBrand\x18\x0f \x01(\t\x12\x13\n\x0b\x64\x65viceModel\x18\x10 \x01(\t\x12\x0e\n\x06osType\x18\x11 \x01(\t\x12\x13\n\x0brealCountry\x18\x12 \x01(\t\x12\x11\n\tunknown22\x18\x16 \x01(\x05\x1a\xec\x01\n\x05_Tag2\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x33\n\x04tag2\x18\x02 \x01(\x0b\x32%.ManualAuthDeviceRequest._Tag2.__Tag2\x12\x14\n\x04tag3\x18\x03 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag5\x18\x05 \x01(\x0b\x32\x06.mmStr\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x1aH\n\x06__Tag2\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\t\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xd3\x07\n\x12ManualAuthResponse\x12.\n\x06result\x18\x01 \x02(\x0b\x32\x1e.ManualAuthResponse.AuthResult\x12\x11\n\tunifyFlag\x18\x02 \x02(\x05\x12\x30\n\tauthParam\x18\x03 \x02(\x0b\x32\x1d.ManualAuthResponse.AuthParam\x12\x34\n\x0b\x61\x63\x63ountInfo\x18\x04 \x01(\x0b\x32\x1f.ManualAuthResponse.AccountInfo\x12\x0f\n\x07\x64nsInfo\x18\x05 \x01(\x0c\x1ai\n\nAuthResult\x12\x0c\n\x04\x63ode\x18\x01 \x02(\x05\x12\x36\n\x07\x65rr_msg\x18\x02 \x02(\x0b\x32%.ManualAuthResponse.AuthResult.ErrMsg\x1a\x15\n\x06\x45rrMsg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a\xe5\x02\n\tAuthParam\x12\x0b\n\x03uin\x18\x01 \x02(\x05\x12\x30\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\".ManualAuthResponse.AuthParam.Ecdh\x12\x39\n\x07session\x18\x03 \x02(\x0b\x32(.ManualAuthResponse.AuthParam.SessionKey\x12\x11\n\tSmsTicket\x18\x10 \x01(\x0c\x12\x18\n\x10\x62indMailLoginUrl\x18\x14 \x01(\t\x12\x12\n\nserverTime\x18\x16 \x01(\x05\x1au\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12;\n\x07\x65\x63\x64hKey\x18\x02 \x01(\x0b\x32*.ManualAuthResponse.AuthParam.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a&\n\nSessionKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a\xad\x02\n\x0b\x41\x63\x63ountInfo\x12\x0c\n\x04wxId\x18\x01 \x01(\t\x12\x10\n\x08nickName\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08\x62indMail\x18\x04 \x01(\t\x12\x12\n\nbindMobile\x18\x05 \x01(\t\x12\r\n\x05\x41lias\x18\x06 \x01(\t\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x0e\n\x06status\x18\x08 \x01(\x05\x12\x12\n\npluginFlag\x18\t \x01(\x05\x12\x14\n\x0cregisterType\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\t\x12\x12\n\nsafeDevice\x18\x0c \x01(\x05\x12\x1a\n\x12officialNamePinyin\x18\r \x01(\t\x12\x16\n\x0eofficialNameZh\x18\x0e \x01(\t\x12\r\n\x05tag15\x18\x0f \x01(\t\x12\r\n\x05\x66sUrl\x18\x10 \x01(\t\"w\n\x0eNewInitRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04wxid\x18\x02 \x01(\t\x12\x14\n\x04tag3\x18\x03 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x12\x10\n\x08language\x18\x05 \x01(\t\"p\n\x0fNewInitResponse\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x10\n\x08sync_key\x18\x02 \x01(\x0c\x12\x11\n\tsync_key2\x18\x03 \x01(\x0c\x12\x0f\n\x07\x63ntList\x18\x06 \x01(\x05\x12\x19\n\x04tag7\x18\x07 \x03(\x0b\x32\x0b.common_msg\"\xb4\x01\n\x0cnew_sync_req\x12)\n\x04\x66lag\x18\x01 \x01(\x0b\x32\x1b.new_sync_req.continue_flag\x12\x10\n\x08selector\x18\x02 \x01(\x05\x12\x10\n\x08sync_Key\x18\x03 \x01(\x0c\x12\r\n\x05scene\x18\x04 \x01(\x05\x12\x0e\n\x06\x64\x65vice\x18\x05 \x01(\t\x12\x17\n\x0fsync_msg_digest\x18\x06 \x01(\x05\x1a\x1d\n\rcontinue_flag\x12\x0c\n\x04\x66lag\x18\x01 \x01(\x05\"\xc2\x01\n\rnew_sync_resp\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x12#\n\x03msg\x18\x02 \x01(\x0b\x32\x16.new_sync_resp.new_msg\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08sync_key\x18\x04 \x01(\x0c\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x1a\x35\n\x07new_msg\x12\x0f\n\x07\x63ntList\x18\x01 \x01(\x05\x12\x19\n\x04tag2\x18\x02 \x03(\x0b\x32\x0b.common_msg')
 )
 
 
@@ -129,6 +129,368 @@ _LOGININFO = _descriptor.Descriptor(
 )
 
 
+_SYNCKEY_MSGKEY_KEY = _descriptor.Descriptor(
+  name='Key',
+  full_name='SyncKey.MsgKey.Key',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='SyncKey.MsgKey.Key.type', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='key', full_name='SyncKey.MsgKey.Key.key', index=1,
+      number=2, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=274,
+  serialized_end=306,
+)
+
+_SYNCKEY_MSGKEY = _descriptor.Descriptor(
+  name='MsgKey',
+  full_name='SyncKey.MsgKey',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cnt', full_name='SyncKey.MsgKey.cnt', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='key', full_name='SyncKey.MsgKey.key', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_SYNCKEY_MSGKEY_KEY, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=217,
+  serialized_end=306,
+)
+
+_SYNCKEY = _descriptor.Descriptor(
+  name='SyncKey',
+  full_name='SyncKey',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='len', full_name='SyncKey.len', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='msgkey', full_name='SyncKey.msgkey', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_SYNCKEY_MSGKEY, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=160,
+  serialized_end=306,
+)
+
+
+_COMMON_MSG_DATA = _descriptor.Descriptor(
+  name='Data',
+  full_name='common_msg.Data',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='len', full_name='common_msg.Data.len', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='common_msg.Data.data', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=368,
+  serialized_end=401,
+)
+
+_COMMON_MSG = _descriptor.Descriptor(
+  name='common_msg',
+  full_name='common_msg',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='type', full_name='common_msg.type', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='common_msg.data', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_COMMON_MSG_DATA, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=308,
+  serialized_end=401,
+)
+
+
+_MSG_WXID = _descriptor.Descriptor(
+  name='Wxid',
+  full_name='Msg.Wxid',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='Msg.Wxid.id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=662,
+  serialized_end=680,
+)
+
+_MSG_RAWCONTENT = _descriptor.Descriptor(
+  name='RawContent',
+  full_name='Msg.RawContent',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='content', full_name='Msg.RawContent.content', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=682,
+  serialized_end=711,
+)
+
+_MSG = _descriptor.Descriptor(
+  name='Msg',
+  full_name='Msg',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='serverid', full_name='Msg.serverid', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='from_id', full_name='Msg.from_id', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='to_id', full_name='Msg.to_id', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='type', full_name='Msg.type', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='raw', full_name='Msg.raw', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='status', full_name='Msg.status', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag7', full_name='Msg.tag7', index=6,
+      number=7, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag8', full_name='Msg.tag8', index=7,
+      number=8, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='createTime', full_name='Msg.createTime', index=8,
+      number=9, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='anticlient', full_name='Msg.anticlient', index=9,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='xmlContent', full_name='Msg.xmlContent', index=10,
+      number=11, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='svrId', full_name='Msg.svrId', index=11,
+      number=12, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='msgKey', full_name='Msg.msgKey', index=12,
+      number=13, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_MSG_WXID, _MSG_RAWCONTENT, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=404,
+  serialized_end=711,
+)
+
+
 _MANUALAUTHACCOUNTREQUEST_AESKEY = _descriptor.Descriptor(
   name='AesKey',
   full_name='ManualAuthAccountRequest.AesKey',
@@ -162,8 +524,8 @@ _MANUALAUTHACCOUNTREQUEST_AESKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=337,
-  serialized_end=371,
+  serialized_start=891,
+  serialized_end=925,
 )
 
 _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY = _descriptor.Descriptor(
@@ -199,8 +561,8 @@ _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=451,
-  serialized_end=486,
+  serialized_start=1005,
+  serialized_end=1040,
 )
 
 _MANUALAUTHACCOUNTREQUEST_ECDH = _descriptor.Descriptor(
@@ -236,8 +598,8 @@ _MANUALAUTHACCOUNTREQUEST_ECDH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=373,
-  serialized_end=486,
+  serialized_start=927,
+  serialized_end=1040,
 )
 
 _MANUALAUTHACCOUNTREQUEST = _descriptor.Descriptor(
@@ -294,8 +656,8 @@ _MANUALAUTHACCOUNTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=160,
-  serialized_end=486,
+  serialized_start=714,
+  serialized_end=1040,
 )
 
 
@@ -346,8 +708,8 @@ _MANUALAUTHDEVICEREQUEST__TAG2___TAG2 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1074,
-  serialized_end=1146,
+  serialized_start=1628,
+  serialized_end=1700,
 )
 
 _MANUALAUTHDEVICEREQUEST__TAG2 = _descriptor.Descriptor(
@@ -411,8 +773,8 @@ _MANUALAUTHDEVICEREQUEST__TAG2 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=910,
-  serialized_end=1146,
+  serialized_start=1464,
+  serialized_end=1700,
 )
 
 _MANUALAUTHDEVICEREQUEST = _descriptor.Descriptor(
@@ -560,8 +922,8 @@ _MANUALAUTHDEVICEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=489,
-  serialized_end=1146,
+  serialized_start=1043,
+  serialized_end=1700,
 )
 
 
@@ -591,8 +953,8 @@ _MANUALAUTHRESPONSE_AUTHRESULT_ERRMSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1443,
-  serialized_end=1464,
+  serialized_start=1997,
+  serialized_end=2018,
 )
 
 _MANUALAUTHRESPONSE_AUTHRESULT = _descriptor.Descriptor(
@@ -628,8 +990,8 @@ _MANUALAUTHRESPONSE_AUTHRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1359,
-  serialized_end=1464,
+  serialized_start=1913,
+  serialized_end=2018,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM_ECDH_ECDHKEY = _descriptor.Descriptor(
@@ -665,8 +1027,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM_ECDH_ECDHKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1749,
-  serialized_end=1784,
+  serialized_start=2303,
+  serialized_end=2338,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM_ECDH = _descriptor.Descriptor(
@@ -702,8 +1064,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM_ECDH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1667,
-  serialized_end=1784,
+  serialized_start=2221,
+  serialized_end=2338,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM_SESSIONKEY = _descriptor.Descriptor(
@@ -739,8 +1101,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM_SESSIONKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1786,
-  serialized_end=1824,
+  serialized_start=2340,
+  serialized_end=2378,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM = _descriptor.Descriptor(
@@ -804,8 +1166,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1467,
-  serialized_end=1824,
+  serialized_start=2021,
+  serialized_end=2378,
 )
 
 _MANUALAUTHRESPONSE_ACCOUNTINFO = _descriptor.Descriptor(
@@ -939,8 +1301,8 @@ _MANUALAUTHRESPONSE_ACCOUNTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1827,
-  serialized_end=2128,
+  serialized_start=2381,
+  serialized_end=2682,
 )
 
 _MANUALAUTHRESPONSE = _descriptor.Descriptor(
@@ -997,8 +1359,8 @@ _MANUALAUTHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1149,
-  serialized_end=2128,
+  serialized_start=1703,
+  serialized_end=2682,
 )
 
 
@@ -1056,234 +1418,10 @@ _NEWINITREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2130,
-  serialized_end=2249,
+  serialized_start=2684,
+  serialized_end=2803,
 )
 
-
-_SYNCKEY_MSGKEY_KEY = _descriptor.Descriptor(
-  name='Key',
-  full_name='SyncKey.MsgKey.Key',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='SyncKey.MsgKey.Key.type', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='key', full_name='SyncKey.MsgKey.Key.key', index=1,
-      number=2, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2366,
-  serialized_end=2398,
-)
-
-_SYNCKEY_MSGKEY = _descriptor.Descriptor(
-  name='MsgKey',
-  full_name='SyncKey.MsgKey',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='cnt', full_name='SyncKey.MsgKey.cnt', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='key', full_name='SyncKey.MsgKey.key', index=1,
-      number=2, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[_SYNCKEY_MSGKEY_KEY, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2309,
-  serialized_end=2398,
-)
-
-_SYNCKEY = _descriptor.Descriptor(
-  name='SyncKey',
-  full_name='SyncKey',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='len', full_name='SyncKey.len', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='msgkey', full_name='SyncKey.msgkey', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[_SYNCKEY_MSGKEY, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2252,
-  serialized_end=2398,
-)
-
-
-_SYNCKEYBYTES = _descriptor.Descriptor(
-  name='SyncKeyBytes',
-  full_name='SyncKeyBytes',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='len', full_name='SyncKeyBytes.len', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='key', full_name='SyncKeyBytes.key', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2400,
-  serialized_end=2440,
-)
-
-
-_NEWINITRESPONSE_TAG7_DATA = _descriptor.Descriptor(
-  name='Data',
-  full_name='NewInitResponse.Tag7.Data',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='len', full_name='NewInitResponse.Tag7.Data.len', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='NewInitResponse.Tag7.Data.data', index=1,
-      number=2, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2658,
-  serialized_end=2691,
-)
-
-_NEWINITRESPONSE_TAG7 = _descriptor.Descriptor(
-  name='Tag7',
-  full_name='NewInitResponse.Tag7',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='type', full_name='NewInitResponse.Tag7.type', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='NewInitResponse.Tag7.data', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[_NEWINITRESPONSE_TAG7_DATA, ],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2594,
-  serialized_end=2691,
-)
 
 _NEWINITRESPONSE = _descriptor.Descriptor(
   name='NewInitResponse',
@@ -1300,16 +1438,16 @@ _NEWINITRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='synckeybytes', full_name='NewInitResponse.synckeybytes', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='sync_key', full_name='NewInitResponse.sync_key', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='synckey', full_name='NewInitResponse.synckey', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='sync_key2', full_name='NewInitResponse.sync_key2', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
@@ -1330,7 +1468,7 @@ _NEWINITRESPONSE = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_NEWINITRESPONSE_TAG7, ],
+  nested_types=[],
   enum_types=[
   ],
   options=None,
@@ -1339,22 +1477,22 @@ _NEWINITRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2443,
-  serialized_end=2691,
+  serialized_start=2805,
+  serialized_end=2917,
 )
 
 
-_MSG_WXID = _descriptor.Descriptor(
-  name='Wxid',
-  full_name='Msg.Wxid',
+_NEW_SYNC_REQ_CONTINUE_FLAG = _descriptor.Descriptor(
+  name='continue_flag',
+  full_name='new_sync_req.continue_flag',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='Msg.Wxid.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='flag', full_name='new_sync_req.continue_flag.flag', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
@@ -1370,134 +1508,55 @@ _MSG_WXID = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2952,
-  serialized_end=2970,
+  serialized_start=3071,
+  serialized_end=3100,
 )
 
-_MSG_RAWCONTENT = _descriptor.Descriptor(
-  name='RawContent',
-  full_name='Msg.RawContent',
+_NEW_SYNC_REQ = _descriptor.Descriptor(
+  name='new_sync_req',
+  full_name='new_sync_req',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='content', full_name='Msg.RawContent.content', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      name='flag', full_name='new_sync_req.flag', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto2',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=2972,
-  serialized_end=3001,
-)
-
-_MSG = _descriptor.Descriptor(
-  name='Msg',
-  full_name='Msg',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
     _descriptor.FieldDescriptor(
-      name='serverid', full_name='Msg.serverid', index=0,
-      number=1, type=3, cpp_type=2, label=1,
+      name='selector', full_name='new_sync_req.selector', index=1,
+      number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='from_id', full_name='Msg.from_id', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='sync_Key', full_name='new_sync_req.sync_Key', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='to_id', full_name='Msg.to_id', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='type', full_name='Msg.type', index=3,
+      name='scene', full_name='new_sync_req.scene', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='raw', full_name='Msg.raw', index=4,
-      number=5, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='device', full_name='new_sync_req.device', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='status', full_name='Msg.status', index=5,
+      name='sync_msg_digest', full_name='new_sync_req.sync_msg_digest', index=5,
       number=6, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='tag7', full_name='Msg.tag7', index=6,
-      number=7, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='tag8', full_name='Msg.tag8', index=7,
-      number=8, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b(""),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='createTime', full_name='Msg.createTime', index=8,
-      number=9, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='anticlient', full_name='Msg.anticlient', index=9,
-      number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='xmlContent', full_name='Msg.xmlContent', index=10,
-      number=11, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='svrId', full_name='Msg.svrId', index=11,
-      number=12, type=3, cpp_type=2, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='msgKey', full_name='Msg.msgKey', index=12,
-      number=13, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -1505,7 +1564,7 @@ _MSG = _descriptor.Descriptor(
   ],
   extensions=[
   ],
-  nested_types=[_MSG_WXID, _MSG_RAWCONTENT, ],
+  nested_types=[_NEW_SYNC_REQ_CONTINUE_FLAG, ],
   enum_types=[
   ],
   options=None,
@@ -1514,10 +1573,131 @@ _MSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2694,
-  serialized_end=3001,
+  serialized_start=2920,
+  serialized_end=3100,
 )
 
+
+_NEW_SYNC_RESP_NEW_MSG = _descriptor.Descriptor(
+  name='new_msg',
+  full_name='new_sync_resp.new_msg',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cntList', full_name='new_sync_resp.new_msg.cntList', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag2', full_name='new_sync_resp.new_msg.tag2', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3244,
+  serialized_end=3297,
+)
+
+_NEW_SYNC_RESP = _descriptor.Descriptor(
+  name='new_sync_resp',
+  full_name='new_sync_resp',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tag1', full_name='new_sync_resp.tag1', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='msg', full_name='new_sync_resp.msg', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag3', full_name='new_sync_resp.tag3', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sync_key', full_name='new_sync_resp.sync_key', index=3,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag5', full_name='new_sync_resp.tag5', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag6', full_name='new_sync_resp.tag6', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='utc', full_name='new_sync_resp.utc', index=6,
+      number=7, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_NEW_SYNC_RESP_NEW_MSG, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3103,
+  serialized_end=3297,
+)
+
+_SYNCKEY_MSGKEY_KEY.containing_type = _SYNCKEY_MSGKEY
+_SYNCKEY_MSGKEY.fields_by_name['key'].message_type = _SYNCKEY_MSGKEY_KEY
+_SYNCKEY_MSGKEY.containing_type = _SYNCKEY
+_SYNCKEY.fields_by_name['msgkey'].message_type = _SYNCKEY_MSGKEY
+_COMMON_MSG_DATA.containing_type = _COMMON_MSG
+_COMMON_MSG.fields_by_name['data'].message_type = _COMMON_MSG_DATA
+_MSG_WXID.containing_type = _MSG
+_MSG_RAWCONTENT.containing_type = _MSG
+_MSG.fields_by_name['from_id'].message_type = _MSG_WXID
+_MSG.fields_by_name['to_id'].message_type = _MSG_WXID
+_MSG.fields_by_name['raw'].message_type = _MSG_RAWCONTENT
 _MANUALAUTHACCOUNTREQUEST_AESKEY.containing_type = _MANUALAUTHACCOUNTREQUEST
 _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY.containing_type = _MANUALAUTHACCOUNTREQUEST_ECDH
 _MANUALAUTHACCOUNTREQUEST_ECDH.fields_by_name['ecdhKey'].message_type = _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY
@@ -1551,31 +1731,24 @@ _MANUALAUTHRESPONSE.fields_by_name['accountInfo'].message_type = _MANUALAUTHRESP
 _NEWINITREQUEST.fields_by_name['login'].message_type = _LOGININFO
 _NEWINITREQUEST.fields_by_name['tag3'].message_type = _MMSTR
 _NEWINITREQUEST.fields_by_name['tag4'].message_type = _MMSTR
-_SYNCKEY_MSGKEY_KEY.containing_type = _SYNCKEY_MSGKEY
-_SYNCKEY_MSGKEY.fields_by_name['key'].message_type = _SYNCKEY_MSGKEY_KEY
-_SYNCKEY_MSGKEY.containing_type = _SYNCKEY
-_SYNCKEY.fields_by_name['msgkey'].message_type = _SYNCKEY_MSGKEY
-_NEWINITRESPONSE_TAG7_DATA.containing_type = _NEWINITRESPONSE_TAG7
-_NEWINITRESPONSE_TAG7.fields_by_name['data'].message_type = _NEWINITRESPONSE_TAG7_DATA
-_NEWINITRESPONSE_TAG7.containing_type = _NEWINITRESPONSE
-_NEWINITRESPONSE.fields_by_name['synckeybytes'].message_type = _SYNCKEYBYTES
-_NEWINITRESPONSE.fields_by_name['synckey'].message_type = _SYNCKEY
-_NEWINITRESPONSE.fields_by_name['tag7'].message_type = _NEWINITRESPONSE_TAG7
-_MSG_WXID.containing_type = _MSG
-_MSG_RAWCONTENT.containing_type = _MSG
-_MSG.fields_by_name['from_id'].message_type = _MSG_WXID
-_MSG.fields_by_name['to_id'].message_type = _MSG_WXID
-_MSG.fields_by_name['raw'].message_type = _MSG_RAWCONTENT
+_NEWINITRESPONSE.fields_by_name['tag7'].message_type = _COMMON_MSG
+_NEW_SYNC_REQ_CONTINUE_FLAG.containing_type = _NEW_SYNC_REQ
+_NEW_SYNC_REQ.fields_by_name['flag'].message_type = _NEW_SYNC_REQ_CONTINUE_FLAG
+_NEW_SYNC_RESP_NEW_MSG.fields_by_name['tag2'].message_type = _COMMON_MSG
+_NEW_SYNC_RESP_NEW_MSG.containing_type = _NEW_SYNC_RESP
+_NEW_SYNC_RESP.fields_by_name['msg'].message_type = _NEW_SYNC_RESP_NEW_MSG
 DESCRIPTOR.message_types_by_name['mmStr'] = _MMSTR
 DESCRIPTOR.message_types_by_name['LoginInfo'] = _LOGININFO
+DESCRIPTOR.message_types_by_name['SyncKey'] = _SYNCKEY
+DESCRIPTOR.message_types_by_name['common_msg'] = _COMMON_MSG
+DESCRIPTOR.message_types_by_name['Msg'] = _MSG
 DESCRIPTOR.message_types_by_name['ManualAuthAccountRequest'] = _MANUALAUTHACCOUNTREQUEST
 DESCRIPTOR.message_types_by_name['ManualAuthDeviceRequest'] = _MANUALAUTHDEVICEREQUEST
 DESCRIPTOR.message_types_by_name['ManualAuthResponse'] = _MANUALAUTHRESPONSE
 DESCRIPTOR.message_types_by_name['NewInitRequest'] = _NEWINITREQUEST
-DESCRIPTOR.message_types_by_name['SyncKey'] = _SYNCKEY
-DESCRIPTOR.message_types_by_name['SyncKeyBytes'] = _SYNCKEYBYTES
 DESCRIPTOR.message_types_by_name['NewInitResponse'] = _NEWINITRESPONSE
-DESCRIPTOR.message_types_by_name['Msg'] = _MSG
+DESCRIPTOR.message_types_by_name['new_sync_req'] = _NEW_SYNC_REQ
+DESCRIPTOR.message_types_by_name['new_sync_resp'] = _NEW_SYNC_RESP
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 mmStr = _reflection.GeneratedProtocolMessageType('mmStr', (_message.Message,), dict(
@@ -1591,6 +1764,67 @@ LoginInfo = _reflection.GeneratedProtocolMessageType('LoginInfo', (_message.Mess
   # @@protoc_insertion_point(class_scope:LoginInfo)
   ))
 _sym_db.RegisterMessage(LoginInfo)
+
+SyncKey = _reflection.GeneratedProtocolMessageType('SyncKey', (_message.Message,), dict(
+
+  MsgKey = _reflection.GeneratedProtocolMessageType('MsgKey', (_message.Message,), dict(
+
+    Key = _reflection.GeneratedProtocolMessageType('Key', (_message.Message,), dict(
+      DESCRIPTOR = _SYNCKEY_MSGKEY_KEY,
+      __module__ = 'mm_pb2'
+      # @@protoc_insertion_point(class_scope:SyncKey.MsgKey.Key)
+      ))
+    ,
+    DESCRIPTOR = _SYNCKEY_MSGKEY,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:SyncKey.MsgKey)
+    ))
+  ,
+  DESCRIPTOR = _SYNCKEY,
+  __module__ = 'mm_pb2'
+  # @@protoc_insertion_point(class_scope:SyncKey)
+  ))
+_sym_db.RegisterMessage(SyncKey)
+_sym_db.RegisterMessage(SyncKey.MsgKey)
+_sym_db.RegisterMessage(SyncKey.MsgKey.Key)
+
+common_msg = _reflection.GeneratedProtocolMessageType('common_msg', (_message.Message,), dict(
+
+  Data = _reflection.GeneratedProtocolMessageType('Data', (_message.Message,), dict(
+    DESCRIPTOR = _COMMON_MSG_DATA,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:common_msg.Data)
+    ))
+  ,
+  DESCRIPTOR = _COMMON_MSG,
+  __module__ = 'mm_pb2'
+  # @@protoc_insertion_point(class_scope:common_msg)
+  ))
+_sym_db.RegisterMessage(common_msg)
+_sym_db.RegisterMessage(common_msg.Data)
+
+Msg = _reflection.GeneratedProtocolMessageType('Msg', (_message.Message,), dict(
+
+  Wxid = _reflection.GeneratedProtocolMessageType('Wxid', (_message.Message,), dict(
+    DESCRIPTOR = _MSG_WXID,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:Msg.Wxid)
+    ))
+  ,
+
+  RawContent = _reflection.GeneratedProtocolMessageType('RawContent', (_message.Message,), dict(
+    DESCRIPTOR = _MSG_RAWCONTENT,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:Msg.RawContent)
+    ))
+  ,
+  DESCRIPTOR = _MSG,
+  __module__ = 'mm_pb2'
+  # @@protoc_insertion_point(class_scope:Msg)
+  ))
+_sym_db.RegisterMessage(Msg)
+_sym_db.RegisterMessage(Msg.Wxid)
+_sym_db.RegisterMessage(Msg.RawContent)
 
 ManualAuthAccountRequest = _reflection.GeneratedProtocolMessageType('ManualAuthAccountRequest', (_message.Message,), dict(
 
@@ -1716,81 +1950,42 @@ NewInitRequest = _reflection.GeneratedProtocolMessageType('NewInitRequest', (_me
   ))
 _sym_db.RegisterMessage(NewInitRequest)
 
-SyncKey = _reflection.GeneratedProtocolMessageType('SyncKey', (_message.Message,), dict(
-
-  MsgKey = _reflection.GeneratedProtocolMessageType('MsgKey', (_message.Message,), dict(
-
-    Key = _reflection.GeneratedProtocolMessageType('Key', (_message.Message,), dict(
-      DESCRIPTOR = _SYNCKEY_MSGKEY_KEY,
-      __module__ = 'mm_pb2'
-      # @@protoc_insertion_point(class_scope:SyncKey.MsgKey.Key)
-      ))
-    ,
-    DESCRIPTOR = _SYNCKEY_MSGKEY,
-    __module__ = 'mm_pb2'
-    # @@protoc_insertion_point(class_scope:SyncKey.MsgKey)
-    ))
-  ,
-  DESCRIPTOR = _SYNCKEY,
-  __module__ = 'mm_pb2'
-  # @@protoc_insertion_point(class_scope:SyncKey)
-  ))
-_sym_db.RegisterMessage(SyncKey)
-_sym_db.RegisterMessage(SyncKey.MsgKey)
-_sym_db.RegisterMessage(SyncKey.MsgKey.Key)
-
-SyncKeyBytes = _reflection.GeneratedProtocolMessageType('SyncKeyBytes', (_message.Message,), dict(
-  DESCRIPTOR = _SYNCKEYBYTES,
-  __module__ = 'mm_pb2'
-  # @@protoc_insertion_point(class_scope:SyncKeyBytes)
-  ))
-_sym_db.RegisterMessage(SyncKeyBytes)
-
 NewInitResponse = _reflection.GeneratedProtocolMessageType('NewInitResponse', (_message.Message,), dict(
-
-  Tag7 = _reflection.GeneratedProtocolMessageType('Tag7', (_message.Message,), dict(
-
-    Data = _reflection.GeneratedProtocolMessageType('Data', (_message.Message,), dict(
-      DESCRIPTOR = _NEWINITRESPONSE_TAG7_DATA,
-      __module__ = 'mm_pb2'
-      # @@protoc_insertion_point(class_scope:NewInitResponse.Tag7.Data)
-      ))
-    ,
-    DESCRIPTOR = _NEWINITRESPONSE_TAG7,
-    __module__ = 'mm_pb2'
-    # @@protoc_insertion_point(class_scope:NewInitResponse.Tag7)
-    ))
-  ,
   DESCRIPTOR = _NEWINITRESPONSE,
   __module__ = 'mm_pb2'
   # @@protoc_insertion_point(class_scope:NewInitResponse)
   ))
 _sym_db.RegisterMessage(NewInitResponse)
-_sym_db.RegisterMessage(NewInitResponse.Tag7)
-_sym_db.RegisterMessage(NewInitResponse.Tag7.Data)
 
-Msg = _reflection.GeneratedProtocolMessageType('Msg', (_message.Message,), dict(
+new_sync_req = _reflection.GeneratedProtocolMessageType('new_sync_req', (_message.Message,), dict(
 
-  Wxid = _reflection.GeneratedProtocolMessageType('Wxid', (_message.Message,), dict(
-    DESCRIPTOR = _MSG_WXID,
+  continue_flag = _reflection.GeneratedProtocolMessageType('continue_flag', (_message.Message,), dict(
+    DESCRIPTOR = _NEW_SYNC_REQ_CONTINUE_FLAG,
     __module__ = 'mm_pb2'
-    # @@protoc_insertion_point(class_scope:Msg.Wxid)
+    # @@protoc_insertion_point(class_scope:new_sync_req.continue_flag)
     ))
   ,
-
-  RawContent = _reflection.GeneratedProtocolMessageType('RawContent', (_message.Message,), dict(
-    DESCRIPTOR = _MSG_RAWCONTENT,
-    __module__ = 'mm_pb2'
-    # @@protoc_insertion_point(class_scope:Msg.RawContent)
-    ))
-  ,
-  DESCRIPTOR = _MSG,
+  DESCRIPTOR = _NEW_SYNC_REQ,
   __module__ = 'mm_pb2'
-  # @@protoc_insertion_point(class_scope:Msg)
+  # @@protoc_insertion_point(class_scope:new_sync_req)
   ))
-_sym_db.RegisterMessage(Msg)
-_sym_db.RegisterMessage(Msg.Wxid)
-_sym_db.RegisterMessage(Msg.RawContent)
+_sym_db.RegisterMessage(new_sync_req)
+_sym_db.RegisterMessage(new_sync_req.continue_flag)
+
+new_sync_resp = _reflection.GeneratedProtocolMessageType('new_sync_resp', (_message.Message,), dict(
+
+  new_msg = _reflection.GeneratedProtocolMessageType('new_msg', (_message.Message,), dict(
+    DESCRIPTOR = _NEW_SYNC_RESP_NEW_MSG,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:new_sync_resp.new_msg)
+    ))
+  ,
+  DESCRIPTOR = _NEW_SYNC_RESP,
+  __module__ = 'mm_pb2'
+  # @@protoc_insertion_point(class_scope:new_sync_resp)
+  ))
+_sym_db.RegisterMessage(new_sync_resp)
+_sym_db.RegisterMessage(new_sync_resp.new_msg)
 
 
 # @@protoc_insertion_point(module_scope)
