@@ -126,74 +126,6 @@ def mmPost(cgi,data):
     conn.close()
     return response
 
-#解包
-def UnPack(src,key = b''):
-    global cookie
-    if len(src) < 0x20:
-        raise RuntimeError('Unpack Error!Please check mm protocol!')     #协议需要更新
-        return b''
-    if not key:
-        key = sessionKey
-    #解析包头   
-    nCur= 0
-    if src[nCur] == struct.unpack('>B',b'\xbf')[0]:
-        nCur += 1                                                         #跳过协议标志位
-    nLenHeader = src[nCur] >> 2                                           #包头长度
-    bUseCompressed = (src[nCur] & 0x3 == 1)                               #包体是否使用压缩算法:01使用,02不使用
-    nCur += 1
-    nDecryptType = src[nCur] >> 4                                         #解密算法(固定为AES解密): 05 aes解密 / 07 rsa解密
-    nLenCookie = src[nCur] & 0xf                                          #cookie长度
-    nCur += 1
-    nCur += 4                                                             #服务器版本(当前固定返回4字节0)
-    uin= struct.unpack('>i',src[nCur:nCur+4])[0]                          #uin
-    nCur += 4
-    cookie_temp = src[nCur:nCur+nLenCookie]                               #cookie
-    if cookie_temp and not(cookie_temp == cookie):
-        cookie = cookie_temp                                              #刷新cookie
-    nCur += nLenCookie
-    (nCgi,nCur) = decoder._DecodeVarint(src,nCur)                         #cgi type
-    (nLenProtobuf,nCur) = decoder._DecodeVarint(src,nCur)                 #压缩前protobuf长度
-    (nLenCompressed,nCur) = decoder._DecodeVarint(src,nCur)               #压缩后protobuf长度
-    logger.debug('包头长度:{}\n是否使用压缩算法:{}\n解密算法:{}\ncookie长度:{}\nuin:{}\ncookie:{}\ncgi type:{}\nprotobuf长度:{}\n压缩后protobuf长度:{}'.format(nLenHeader, bUseCompressed, nDecryptType, nLenCookie, uin, str(cookie), nCgi, nLenProtobuf, nLenCompressed))
-    #对包体aes解密解压缩
-    body = src[nLenHeader:]                                               #取包体数据
-    if bUseCompressed:
-        protobufData = decompress_and_aesDecrypt(body,key)
-    else:
-        protobufData = aesDecrypt(body,key)
-    logger.debug('解密后数据:%s' % str(protobufData))
-    return protobufData
-
-#组包(压缩加密+封包),参数:protobuf序列化后数据,cgi类型,是否使用压缩算法
-def pack(src,cgi_type,use_compress = 0):
-    #必要参数合法性判定
-    if not cookie or not uin or not sessionKey:
-        return b''
-    #压缩加密
-    len_proto_compressed = len(src)
-    if use_compress:
-        (body,len_proto_compressed) = compress_and_aes(src,sessionKey)
-    else:
-        body = aes(src,sessionKey)
-    logger.debug("cgi:{},protobuf数据:{}\n加密后数据:{}".format(cgi_type,b2hex(src),b2hex(body))) 
-    #封包包头
-    header = bytearray(0)
-    header += b'\xbf'                                                               #标志位(可忽略该字节)
-    header += bytes([0])                                                            #最后2bit：02--包体不使用压缩算法;前6bit:包头长度,最后计算                                       #
-    header += bytes([((0x5<<4) + 0xf)])                                             #05:AES加密算法  0xf:cookie长度(默认使用15字节长的cookie)
-    header += struct.pack(">I",define.__CLIENT_VERSION__)                           #客户端版本号 网络字节序
-    header += struct.pack(">i",uin)                                                 #uin
-    header += cookie                                                                #coockie
-    header += encoder._VarintBytes(cgi_type)                                        #cgi type
-    header += encoder._VarintBytes(len(src))                                        #body proto压缩前长度
-    header += encoder._VarintBytes(len_proto_compressed)                            #body proto压缩后长度
-    header += bytes([0]*15)                                                         #3个未知变长整数参数,共15字节
-    header[1] = (len(header)<<2) + 2                                                #包头长度
-    logger.debug("包头数据:{}".format(b2hex(header)))
-    #组包
-    senddata = header + body
-    return senddata
-
 #退出程序
 def ExitProcess():
     os.system("pause")
@@ -302,3 +234,6 @@ def utc_to_local_time(utc):
 #获取本地时间
 def get_utc():
     return int(time.time())
+
+#str转bytes
+str2bytes = lambda s : bytes(s, encoding = "utf8")

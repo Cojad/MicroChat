@@ -45,17 +45,19 @@ message common_msg
 		optional Data data 			= 2;
 }
 
+//wxid
+message Wxid
+{
+	optional string id = 1;
+}
+
 //服务器返回消息(newinit/newsync)
 message Msg
 {
 	optional int64 serverid 		= 1;
-	message Wxid
-	{
-		optional string id = 1;
-	}
 	optional Wxid from_id 			= 2;							//发送方wxid
 	optional Wxid to_id 			= 3;							//接收方wxid
-	optional int32 type 			= 4;							//消息类型:9999==>系统垃圾消息,10002==>sysmsg(系统垃圾消息),49==>appmsg,1==>文字消息
+	optional int32 type 			= 4;							//消息类型:9999==>系统垃圾消息,10002==>sysmsg(系统垃圾消息),49==>appmsg,1==>文字消息,10000==>系统提示
 	message RawContent
 	{
 		optional string content = 1;
@@ -67,7 +69,7 @@ message Msg
 	optional int32 createTime 		= 9;							//消息发送时间
 	optional string anticlient 		= 10;
 	optional string xmlContent 		= 11;							//推送内容(xml格式)
-	optional int64 svrId 			= 12;
+	optional int64 svrId 			= 12;							//每条消息的唯一id
 	optional int32 msgKey 			= 13;							//sync key中的id
 }
 
@@ -261,6 +263,33 @@ message new_sync_resp
 	optional int32  utc 				= 7;
 }
 
+//发送消息请求
+message new_send_msg_req
+{
+	optional int32  cnt  				= 1;						//本次发送的消息数量
+	message msg_info 
+	{
+		optional Wxid  to  			= 1;							//to wxid
+		optional bytes content 		= 2;							//消息内容
+		optional int32 type 		= 3;							//消息类型: 文字消息=>1,名片=>42，
+		optional int32 utc 			= 4;
+		optional int32 client_id 	= 5;							//不同消息的utc与client_id必须至少有1个不相同
+	}
+	optional msg_info msg 				= 2;						//这里可以是repeated,允许一次发送多条消息
+}
 
-
+//发送消息响应
+message new_send_msg_resp
+{
+	optional mmStr tag1					= 1;
+	optional int32 cnt 					= 2;
+	message result
+	{
+		optional int32 code		= 1;								//错误码 0=>发送成功,-44=>对方开启了朋友验证(被删好友),-22=>消息已发出,但被对方拒收了(被拉黑)
+		optional Wxid  to   	= 2;								//to wxid
+		optional int32 type 	= 7;								//消息类型
+		optional int64 svrid 	= 8;								//消息唯一id
+	}
+	optional result res					= 3;						//发送结果
+}
 

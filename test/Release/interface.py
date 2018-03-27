@@ -46,8 +46,7 @@ def GetDns():
 
     logger.info('长链接ip:' + ipLong + ',短链接ip:' + ipShort)
 
-    dns = {'longip':ipLong, 'shortip':ipShort}
-    return dns
+    return {'longip':ipLong, 'shortip':ipShort}
 
 #登录,参数为账号,密码
 def Login(name,password):
@@ -68,11 +67,10 @@ def new_init():
 
     #发包
     ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/newinit',send_data)
-    logger.debug('返回数据:' + str(ret_bytes))
+    logger.debug('new_init返回数据:' + str(ret_bytes))
 
     #解包
-    business.new_init_buf2resp(ret_bytes)  
-    return
+    return business.new_init_buf2resp(ret_bytes)  
 
 #同步消息
 def new_sync():
@@ -81,11 +79,22 @@ def new_sync():
 
     #发包
     ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/newsync',send_data)
-    logger.debug('返回数据:' + str(ret_bytes))
+    logger.debug('new_sync返回数据:' + str(ret_bytes))
 
     #解包
-    business.new_sync_buf2resp(ret_bytes)  
-    return
+    return business.new_sync_buf2resp(ret_bytes)  
+
+#发消息
+def new_send_msg(to_wxid,msg_content,msg_type = 1):
+    #组包
+    send_data = business.new_send_msg_req2buf(to_wxid,msg_content,msg_type)
+
+    #发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/newsendmsg',send_data)
+    logger.debug('new_send_msg返回数据:' + Util.b2hex(ret_bytes))
+
+    #解包
+    return business.new_send_msg_buf2resp(ret_bytes)
 
 
 #初始化python模块    
