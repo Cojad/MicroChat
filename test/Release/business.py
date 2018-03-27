@@ -9,6 +9,7 @@ import xmltodict
 import zlib
 import define
 import mm_pb2
+import plugin
 import Util
 from Util import logger
 from google.protobuf.internal import decoder,encoder
@@ -282,6 +283,8 @@ def new_sync_buf2resp(buf):
                 #将消息存入数据库
                 Util.insert_msg_to_db(msg.serverid,msg.createTime,msg.from_id.id,msg.to_id.id,msg.type,msg.raw.content)
                 logger.info('收到新消息:\ncreate utc time:{}\ntype:{}\nfrom:{}\nto:{}\nraw data:{}\nxml data:{}'.format(Util.utc_to_local_time(msg.createTime), msg.type, msg.from_id.id, msg.to_id.id, msg.raw.content, msg.xmlContent))
+                #接入插件
+                plugin.dispatch(msg)
     return
 
 #通知服务器消息已接收(无返回数据)(仅用于长链接)

@@ -96,7 +96,7 @@ def unpack(buf):
                         raise RuntimeError('登录失败!')          #登录失败
                     else:
                         #登录成功,测试发送消息接口
-                        interface.new_send_msg('weixin',Util.str2bytes('Hello weixin!'))
+                        interface.new_send_msg('weixin','Hello weixin!'.encode(encoding="utf-8"))
             return (UNPACK_OK,buf[len_ack:])
 
     return (UNPACK_OK,b'')

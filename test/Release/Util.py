@@ -126,6 +126,17 @@ def mmPost(cgi,data):
     conn.close()
     return response
 
+#HTTP短链接发包
+def post(host,api,data,head=''):
+    conn = http.client.HTTPConnection(host, timeout=2)
+    if head:
+        conn.request("POST",api,data,head)
+    else:
+        conn.request("POST",api,data)
+    response = conn.getresponse().read()
+    conn.close()
+    return response
+
 #退出程序
 def ExitProcess():
     os.system("pause")
