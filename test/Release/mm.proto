@@ -293,3 +293,41 @@ message new_send_msg_resp
 	optional result res					= 3;						//发送结果
 }
 
+//分享链接请求(也可以分享app链接)
+message new_send_app_msg_req
+{
+	optional LoginInfo login 				= 1;					//登录信息
+	message appmsg_info
+	{
+		optional string from_wxid		= 1;
+		optional string app_wxid		= 2;
+		optional int32 tag3				= 3;						//unknown just set 0
+		optional string to_wxid			= 4;
+		optional int32 type				= 5;						//app_msg type == 5
+		optional string content			= 6;						//appmsg具体信息
+		optional int32 utc				= 7;
+		optional string client_id		= 8;						//to_wxid+randomin+T+utc
+		optional int32 tag10 			= 10;						//unknown just set 3
+		optional int32 tag11			= 11;						//unknown just set 0
+	}
+	optional appmsg_info info               = 2;					//appmsg消息
+	optional int32 tag4 					= 4;					//unknown just set 0
+	optional int32 tag6 					= 6;					//unknown just set 0
+	optional string tag7					= 7;					//unknown just set ''
+	optional string fromScene				= 8;
+	optional int32 tag9 					= 9;					//unknown just set 0
+	optional int32 tag10 					= 10;					//unknown just set 0
+}
+
+//分享链接响应
+message new_send_app_msg_resp
+{
+	optional mmStr tag1						= 1;					//结果?
+	optional string from_wxid				= 3;
+	optional string to_wxid					= 4;
+	optional int32 sync_key_id				= 5;
+	optional string client_id				= 6;
+	optional int32 utc						= 7;
+	optional int32 type						= 8;
+	optional int32 svrid					= 9;
+}

@@ -96,6 +96,18 @@ def new_send_msg(to_wxid,msg_content,msg_type = 1):
     #解包
     return business.new_send_msg_buf2resp(ret_bytes)
 
+#分享链接
+def send_app_msg(wxid,title,des,link_url,thumb_url=''):
+     #组包
+    send_data = business.send_app_msg_req2buf(wxid,title,des,link_url,thumb_url)
+
+    #发包
+    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/sendappmsg',send_data)
+    logger.debug('send_app_msg返回数据:' + Util.b2hex(ret_bytes))
+
+    #解包
+    return business.send_app_msg_buf2resp(ret_bytes)
+
 
 #初始化python模块    
 def InitAll():

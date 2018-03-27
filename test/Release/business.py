@@ -206,7 +206,7 @@ def new_init_req2buf():
     new_init_request = mm_pb2.NewInitRequest(
         login = mm_pb2.LoginInfo(
             aesKey =  Util.sessionKey,
-            uin = 0,
+            uin = Util.uin,
             guid = define.__GUID__ + '\0',          #guid以\0结尾
             clientVer = define.__CLIENT_VERSION__,
             androidVer = define.__ANDROID_VER__,
@@ -328,3 +328,45 @@ def new_send_msg_buf2resp(buf):
     else:
         logger.debug('消息发送成功,svrid:{}'.format(res.res.svrid))
     return res.res.code
+
+#分享链接组包函数
+def send_app_msg_req2buf(wxid,title,des,link_url,thumb_url):
+    #protobuf组包
+    req = mm_pb2.new_send_app_msg_req(
+        login = mm_pb2.LoginInfo(
+            aesKey =  Util.sessionKey,
+            uin = Util.uin,
+            guid = define.__GUID__ + '\0',          #guid以\0结尾
+            clientVer = define.__CLIENT_VERSION__,
+            androidVer = define.__ANDROID_VER__,
+            unknown = 0,
+        ),
+        info = mm_pb2.new_send_app_msg_req.appmsg_info(
+            from_wxid = Util.wxid,
+            app_wxid = '',
+            tag3 = 0,
+            to_wxid = wxid,
+            type = 5,
+            content = define.SHARE_LINK.format(title,des,link_url,thumb_url),
+            utc = Util.get_utc(),
+            client_id = '{}{}{}{}'.format(wxid,random.randint(1,99),'T',Util.get_utc()*1000 + random.randint(1,999)),
+            tag10 = 3,
+            tag11 = 0,
+        ),
+        tag4 = 0,
+        tag6 = 0,
+        tag7 = '',
+        fromScene = '',
+        tag9 = 0,
+        tag10 = 0,
+    )
+     #组包
+    return pack(req.SerializeToString(),222)
+
+#分享链接解包函数
+def send_app_msg_buf2resp(buf):
+    #解包
+    res = mm_pb2.new_send_app_msg_resp()
+    res.ParseFromString(UnPack(buf))
+    logger.debug('分享链接发送结果:{},svrid:{}'.format(res.tag1.len,res.svrid))
+    return res.tag1.len
