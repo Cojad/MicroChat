@@ -62,15 +62,18 @@ def Login(name,password):
 
 #首次登录设备初始化
 def new_init():
-    #组包
-    send_data = business.new_init_req2buf()
+    continue_flag = True
+    cur = max = b''
+    while continue_flag:
+        #组包
+        send_data = business.new_init_req2buf(cur,max)
+        #发包
+        ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/newinit',send_data)
+        logger.debug('new_init返回数据:' + str(ret_bytes))
+        #解包
+        (continue_flag,cur,max) = business.new_init_buf2resp(ret_bytes)
 
-    #发包
-    ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/newinit',send_data)
-    logger.debug('new_init返回数据:' + str(ret_bytes))
-
-    #解包
-    return business.new_init_buf2resp(ret_bytes)  
+    return 
 
 #同步消息
 def new_sync():

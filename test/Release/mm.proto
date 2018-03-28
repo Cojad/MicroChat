@@ -36,7 +36,7 @@ message SyncKey
 //同步消息
 message common_msg
 {
-		optional int32  type 		= 1;						//消息类型:1==>个人信息,2==>最近联系人数据,5==>服务器上未读取的最新消息,其余消息类型暂未知
+		optional int32  type 		= 1;						//消息类型:1==>个人信息,2==>好友信息,5==>服务器上未读取的最新消息,其余消息类型暂未知
 		message Data
 		{
 			optional int32 len 		= 1;
@@ -73,7 +73,106 @@ message Msg
 	optional int32 msgKey 			= 13;							//sync key中的id
 }
 
-
+//好友详细信息
+message contact_info
+{
+	optional Wxid 	wxid 		= 1;
+	message NickName
+	{
+		optional string name    = 1;
+	}
+	optional NickName nickname 	= 2;
+	message PY_SHORT
+	{
+		optional string name    = 1;
+	}
+	optional PY_SHORT shortPy 	= 3;
+	message QuanPin
+	{
+		optional string name    = 1;
+	}
+	optional QuanPin quanpin 	= 4;
+	optional int32  sex 		= 5;						//性别：0=>未知,1=>男,2=>女
+	optional string tag6    	= 6;
+	optional int32  tag7  		= 7;
+	optional int32  tag8 		= 8;						//todo
+	optional int32  tag9 		= 9;
+	message BeiZhu
+	{
+		optional string name    = 1;
+	}
+	optional BeiZhu remark_name = 10;						//备注名:为空则显示nickname
+	message REAL_PY_SHORT
+	{
+		optional string name    = 1;
+	}
+	optional REAL_PY_SHORT real_shortPy 	= 11;
+	message REAL_QuanPin
+	{
+		optional string name    = 1;
+	}
+	optional REAL_QuanPin real_quanpin 	= 12;
+	optional int32  tag13 		= 13;
+	optional int32  tag14 		= 14;
+	optional string tag16    	= 16;
+	optional int32  bChatRoom 	= 17;							//todo
+	optional int32  tag18 		= 18;
+	optional string sheng    	= 19;
+	optional string shi    		= 20;
+	optional string qianming    = 21;							//签名
+	optional int32  tag22     	= 22;							//todo
+	optional int32  tag23  		= 23;							//todo
+	optional int32  register_body_type = 24;					//8=>个人;24=>公司
+	optional string register_body = 25;							//注册主体:xx公司或个人
+	optional int32  tag26       = 26;
+	optional int32  src 		= 27;							//好友来源:(10000XX为对方添加自己)0=>未知;1=>QQ;3=>微信号;6=>名片;13=>手机通讯录;14=>群聊;15=>手机号;30=>扫一扫  （1000015=>对方手机号;1000030=>对方扫一扫;1000014=>对方群聊......）
+	
+	optional string lastMsgTime = 29;
+	optional string alias 		= 30;							//微信号(未设置则显示wxid)
+	
+	optional string chatroomOwnerWxid = 31;
+	
+	optional int32  tag33 		= 33;
+	optional int32  tag34 		= 34;
+	optional int32  tag35 		= 35;
+	
+	optional bytes tag37 		= 37;							//个人相册封面图片
+	optional string country 	= 38;
+	optional string avatar_big	= 39;
+	optional string avatar_small= 40;
+	
+	optional bytes tag42 		= 42;
+	
+	optional string v1_name		= 45;							//encryptName(等价于wxid,固定不变)		
+	
+	optional bytes tag50 		= 50;
+	
+	optional int32  chatroom_serverVer 	= 53;
+	optional int32  chatroom_max_member = 55;
+	optional int32  tag56 		= 56;
+	message GroupMemberList
+	{
+		optional int32 cnt = 1;
+		message MemberInfo
+		{
+			optional string wxid = 1;
+			optional int32  tag6 = 6;
+			optional int32  tag8 = 8;
+		}
+		repeated MemberInfo member = 2;
+		optional int32   tag3 = 3;
+		optional string  tag4 = 4;
+	}
+	optional GroupMemberList group_member_list 	= 57;
+	optional int32  tag58 		= 58;
+	
+	optional bytes  tag62 		= 62;
+	
+	optional int32  tag64 		= 64;
+	optional int32  tag65 		= 65;
+	optional int32  tag66 		= 66;
+	optional int32  tag67 		= 67;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -216,8 +315,8 @@ message NewInitRequest
 {
 	optional LoginInfo login 				= 1;
 	optional string wxid 					= 2;
-	optional mmStr tag3						= 3;
-	optional mmStr tag4						= 4;
+	optional bytes sync_key_cur				= 3;				//首次初始化时sync_key_cur = ''
+	optional bytes sync_key_max				= 4;				//首次初始化时sync_key_max = ''
 	optional string language 				= 5;
 }
 
@@ -225,8 +324,9 @@ message NewInitRequest
 message NewInitResponse 
 {
 	optional string tag1 					= 1;
-	optional bytes sync_key					= 2;				//synckey二进制数据
-	optional bytes sync_key2				= 3;				//与sync_key数据相同
+	optional bytes sync_key_cur				= 2;				//当前synckey二进制数据
+	optional bytes sync_key_max				= 3;				//最新synckey二进制数据(若与sync_key_cur不相同,则continue_flag返回1,表示需要继续初始化)
+	optional int32 continue_flag			= 4;				//为1时表示仍要继续调用newinit初始化,直到该标志位返回0停止初始化(联系人或未读消息数据太多,无法一次获取完毕)
 	optional int32  cntList 				= 6;				//tag7结构体数量
 	repeated common_msg tag7 			    = 7;				//需要根据消息类型解析
 }

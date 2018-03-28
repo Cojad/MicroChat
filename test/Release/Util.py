@@ -139,8 +139,8 @@ def post(host,api,data,head=''):
 
 #退出程序
 def ExitProcess():
-    os.system("pause")
     logger.info('===========bye===========')
+    os.system("pause")
     sys.exit()
 
 #使用IE浏览器访问网页(阻塞)
@@ -207,6 +207,8 @@ def init_db():
     cur = conn.cursor()
     #建消息表
     cur.execute('create table if not exists msg(svrid bigint unique,utc integer,createtime varchar(1024),fromWxid varchar(1024),toWxid varchar(1024),type integer,content text(65535))')
+    #建联系人表
+    cur.execute('create table if not exists contact(wxid varchar(1024) unique,nick_name varchar(1024),remark_name varchar(1024),alias varchar(1024),avatar_big varchar(1024),v1_name varchar(1024),sex integer,country varchar(1024),sheng varchar(1024),shi varchar(1024),qianming varchar(2048),register_body varchar(1024),src integer,chatroom_owner varchar(1024),chatroom_serverVer integer,chatroom_max_member integer,chatroom_member_cnt integer)')
     #建sync key表
     cur.execute('create table if not exists synckey(key varchar(4096))')
     return
@@ -234,9 +236,22 @@ def insert_msg_to_db(svrid,utc,from_wxid,to_wxid,type,content):
     try:
         cur.execute("insert into msg(svrid,utc,createtime,fromWxid,toWxid,type,content) values('{}','{}','{}','{}','{}','{}','{}')".format(svrid,utc,utc_to_local_time(utc),from_wxid,to_wxid,type,content))
         conn.commit()
-    except:
-        logger.info('insert_msg_to_db error!')
-    return    
+    except Exception as e:
+        logger.info('insert_msg_to_db error:{}',str(e))
+    return
+
+#保存/刷新好友消息
+def insert_contact_info_to_db(wxid,nick_name,remark_name,alias,avatar_big,v1_name,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt):
+    cur = conn.cursor()
+    try:
+        #先删除旧的信息
+        cur.execute("delete from contact where wxid = '{}'".format(wxid))
+        #插入最新联系人数据
+        cur.execute("insert into contact(wxid,nick_name,remark_name,alias,avatar_big,v1_name,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt) values('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(wxid,nick_name,remark_name,alias,avatar_big,v1_name,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt))
+        conn.commit()
+    except Exception as e:
+        logger.info('insert_contact_info_to_db error:{}',str(e))
+    return
 
 #utc转本地时间
 def utc_to_local_time(utc):
@@ -248,3 +263,12 @@ def get_utc():
 
 #str转bytes
 str2bytes = lambda s : bytes(s, encoding = "utf8")
+
+#获取添加好友方式
+def get_way(src):
+    if src in define.WAY.keys() or (src - 1000000) in define.WAY.keys():
+        if src > 1000000:
+            return '对方通过' + define.WAY[src-1000000] + '添加'
+        elif src:
+            return '通过' + define.WAY[src] + '添加'
+    return define.WAY[0]

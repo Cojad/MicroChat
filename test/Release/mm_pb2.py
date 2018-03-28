@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='mm.proto',
   package='',
   syntax='proto2',
-  serialized_pb=_b('\n\x08mm.proto\"!\n\x05mmStr\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0b\n\x03str\x18\x02 \x01(\t\"n\n\tLoginInfo\x12\x0e\n\x06\x61\x65sKey\x18\x01 \x01(\x0c\x12\x0b\n\x03uin\x18\x02 \x01(\x05\x12\x0c\n\x04guid\x18\x03 \x01(\t\x12\x11\n\tclientVer\x18\x04 \x01(\x05\x12\x12\n\nandroidVer\x18\x05 \x01(\t\x12\x0f\n\x07unknown\x18\x06 \x01(\x05\"\x92\x01\n\x07SyncKey\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x1f\n\x06msgkey\x18\x02 \x01(\x0b\x32\x0f.SyncKey.MsgKey\x1aY\n\x06MsgKey\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12 \n\x03key\x18\x02 \x03(\x0b\x32\x13.SyncKey.MsgKey.Key\x1a \n\x03Key\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x03\"]\n\ncommon_msg\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x1e\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x10.common_msg.Data\x1a!\n\x04\x44\x61ta\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x12\n\x04Wxid\x12\n\n\x02id\x18\x01 \x01(\t\"\x97\x02\n\x03Msg\x12\x10\n\x08serverid\x18\x01 \x01(\x03\x12\x16\n\x07\x66rom_id\x18\x02 \x01(\x0b\x32\x05.Wxid\x12\x14\n\x05to_id\x18\x03 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04type\x18\x04 \x01(\x05\x12\x1c\n\x03raw\x18\x05 \x01(\x0b\x32\x0f.Msg.RawContent\x12\x0e\n\x06status\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x0c\x12\x12\n\ncreateTime\x18\t \x01(\x05\x12\x12\n\nanticlient\x18\n \x01(\t\x12\x12\n\nxmlContent\x18\x0b \x01(\t\x12\r\n\x05svrId\x18\x0c \x01(\x03\x12\x0e\n\x06msgKey\x18\r \x01(\x05\x1a\x1d\n\nRawContent\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t\"\xc6\x02\n\x18ManualAuthAccountRequest\x12-\n\x03\x61\x65s\x18\x01 \x02(\x0b\x32 .ManualAuthAccountRequest.AesKey\x12,\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\x1e.ManualAuthAccountRequest.Ecdh\x12\x10\n\x08userName\x18\x03 \x02(\t\x12\x11\n\tpassword1\x18\x04 \x02(\t\x12\x11\n\tpassword2\x18\x05 \x02(\t\x1a\"\n\x06\x41\x65sKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\x1aq\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12\x37\n\x07\x65\x63\x64hKey\x18\x02 \x02(\x0b\x32&.ManualAuthAccountRequest.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\"\x91\x05\n\x17ManualAuthDeviceRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12,\n\x04tag2\x18\x02 \x01(\x0b\x32\x1e.ManualAuthDeviceRequest._Tag2\x12\x0c\n\x04imei\x18\x03 \x01(\t\x12\x13\n\x0bsoftInfoXml\x18\x04 \x01(\t\x12\x10\n\x08unknown5\x18\x05 \x01(\x05\x12\x13\n\x0b\x63lientSeqID\x18\x06 \x01(\t\x12\x18\n\x10\x63lientSeqID_sign\x18\x07 \x01(\t\x12\x17\n\x0floginDeviceName\x18\x08 \x01(\t\x12\x15\n\rdeviceInfoXml\x18\t \x01(\t\x12\x10\n\x08language\x18\n \x01(\t\x12\x10\n\x08timeZone\x18\x0b \x01(\t\x12\x11\n\tunknown13\x18\r \x01(\x05\x12\x11\n\tunknown14\x18\x0e \x01(\x05\x12\x13\n\x0b\x64\x65viceBrand\x18\x0f \x01(\t\x12\x13\n\x0b\x64\x65viceModel\x18\x10 \x01(\t\x12\x0e\n\x06osType\x18\x11 \x01(\t\x12\x13\n\x0brealCountry\x18\x12 \x01(\t\x12\x11\n\tunknown22\x18\x16 \x01(\x05\x1a\xec\x01\n\x05_Tag2\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x33\n\x04tag2\x18\x02 \x01(\x0b\x32%.ManualAuthDeviceRequest._Tag2.__Tag2\x12\x14\n\x04tag3\x18\x03 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag5\x18\x05 \x01(\x0b\x32\x06.mmStr\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x1aH\n\x06__Tag2\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\t\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xd3\x07\n\x12ManualAuthResponse\x12.\n\x06result\x18\x01 \x02(\x0b\x32\x1e.ManualAuthResponse.AuthResult\x12\x11\n\tunifyFlag\x18\x02 \x02(\x05\x12\x30\n\tauthParam\x18\x03 \x02(\x0b\x32\x1d.ManualAuthResponse.AuthParam\x12\x34\n\x0b\x61\x63\x63ountInfo\x18\x04 \x01(\x0b\x32\x1f.ManualAuthResponse.AccountInfo\x12\x0f\n\x07\x64nsInfo\x18\x05 \x01(\x0c\x1ai\n\nAuthResult\x12\x0c\n\x04\x63ode\x18\x01 \x02(\x05\x12\x36\n\x07\x65rr_msg\x18\x02 \x02(\x0b\x32%.ManualAuthResponse.AuthResult.ErrMsg\x1a\x15\n\x06\x45rrMsg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a\xe5\x02\n\tAuthParam\x12\x0b\n\x03uin\x18\x01 \x02(\x05\x12\x30\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\".ManualAuthResponse.AuthParam.Ecdh\x12\x39\n\x07session\x18\x03 \x02(\x0b\x32(.ManualAuthResponse.AuthParam.SessionKey\x12\x11\n\tSmsTicket\x18\x10 \x01(\x0c\x12\x18\n\x10\x62indMailLoginUrl\x18\x14 \x01(\t\x12\x12\n\nserverTime\x18\x16 \x01(\x05\x1au\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12;\n\x07\x65\x63\x64hKey\x18\x02 \x01(\x0b\x32*.ManualAuthResponse.AuthParam.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a&\n\nSessionKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a\xad\x02\n\x0b\x41\x63\x63ountInfo\x12\x0c\n\x04wxId\x18\x01 \x01(\t\x12\x10\n\x08nickName\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08\x62indMail\x18\x04 \x01(\t\x12\x12\n\nbindMobile\x18\x05 \x01(\t\x12\r\n\x05\x41lias\x18\x06 \x01(\t\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x0e\n\x06status\x18\x08 \x01(\x05\x12\x12\n\npluginFlag\x18\t \x01(\x05\x12\x14\n\x0cregisterType\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\t\x12\x12\n\nsafeDevice\x18\x0c \x01(\x05\x12\x1a\n\x12officialNamePinyin\x18\r \x01(\t\x12\x16\n\x0eofficialNameZh\x18\x0e \x01(\t\x12\r\n\x05tag15\x18\x0f \x01(\t\x12\r\n\x05\x66sUrl\x18\x10 \x01(\t\"w\n\x0eNewInitRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04wxid\x18\x02 \x01(\t\x12\x14\n\x04tag3\x18\x03 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x12\x10\n\x08language\x18\x05 \x01(\t\"p\n\x0fNewInitResponse\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x10\n\x08sync_key\x18\x02 \x01(\x0c\x12\x11\n\tsync_key2\x18\x03 \x01(\x0c\x12\x0f\n\x07\x63ntList\x18\x06 \x01(\x05\x12\x19\n\x04tag7\x18\x07 \x03(\x0b\x32\x0b.common_msg\"\xb4\x01\n\x0cnew_sync_req\x12)\n\x04\x66lag\x18\x01 \x01(\x0b\x32\x1b.new_sync_req.continue_flag\x12\x10\n\x08selector\x18\x02 \x01(\x05\x12\x10\n\x08sync_Key\x18\x03 \x01(\x0c\x12\r\n\x05scene\x18\x04 \x01(\x05\x12\x0e\n\x06\x64\x65vice\x18\x05 \x01(\t\x12\x17\n\x0fsync_msg_digest\x18\x06 \x01(\x05\x1a\x1d\n\rcontinue_flag\x12\x0c\n\x04\x66lag\x18\x01 \x01(\x05\"\xc2\x01\n\rnew_sync_resp\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x12#\n\x03msg\x18\x02 \x01(\x0b\x32\x16.new_sync_resp.new_msg\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08sync_key\x18\x04 \x01(\x0c\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x1a\x35\n\x07new_msg\x12\x0f\n\x07\x63ntList\x18\x01 \x01(\x05\x12\x19\n\x04tag2\x18\x02 \x03(\x0b\x32\x0b.common_msg\"\xa6\x01\n\x10new_send_msg_req\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12\'\n\x03msg\x18\x02 \x01(\x0b\x32\x1a.new_send_msg_req.msg_info\x1a\\\n\x08msg_info\x12\x11\n\x02to\x18\x01 \x01(\x0b\x32\x05.Wxid\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x0b\n\x03utc\x18\x04 \x01(\x05\x12\x11\n\tclient_id\x18\x05 \x01(\x05\"\xa6\x01\n\x11new_send_msg_resp\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63nt\x18\x02 \x01(\x05\x12&\n\x03res\x18\x03 \x01(\x0b\x32\x19.new_send_msg_resp.result\x1a\x46\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x11\n\x02to\x18\x02 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04type\x18\x07 \x01(\x05\x12\r\n\x05svrid\x18\x08 \x01(\x03\"\xed\x02\n\x14new_send_app_msg_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12/\n\x04info\x18\x02 \x01(\x0b\x32!.new_send_app_msg_req.appmsg_info\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x11\n\tfromScene\x18\x08 \x01(\t\x12\x0c\n\x04tag9\x18\t \x01(\x05\x12\r\n\x05tag10\x18\n \x01(\x05\x1a\xae\x01\n\x0b\x61ppmsg_info\x12\x11\n\tfrom_wxid\x18\x01 \x01(\t\x12\x10\n\x08\x61pp_wxid\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x0f\n\x07to_wxid\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\x05\x12\x0f\n\x07\x63ontent\x18\x06 \x01(\t\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x12\x11\n\tclient_id\x18\x08 \x01(\t\x12\r\n\x05tag10\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\x05\"\xa3\x01\n\x15new_send_app_msg_resp\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x11\n\tfrom_wxid\x18\x03 \x01(\t\x12\x0f\n\x07to_wxid\x18\x04 \x01(\t\x12\x13\n\x0bsync_key_id\x18\x05 \x01(\x05\x12\x11\n\tclient_id\x18\x06 \x01(\t\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x12\x0c\n\x04type\x18\x08 \x01(\x05\x12\r\n\x05svrid\x18\t \x01(\x05')
+  serialized_pb=_b('\n\x08mm.proto\"!\n\x05mmStr\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0b\n\x03str\x18\x02 \x01(\t\"n\n\tLoginInfo\x12\x0e\n\x06\x61\x65sKey\x18\x01 \x01(\x0c\x12\x0b\n\x03uin\x18\x02 \x01(\x05\x12\x0c\n\x04guid\x18\x03 \x01(\t\x12\x11\n\tclientVer\x18\x04 \x01(\x05\x12\x12\n\nandroidVer\x18\x05 \x01(\t\x12\x0f\n\x07unknown\x18\x06 \x01(\x05\"\x92\x01\n\x07SyncKey\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x1f\n\x06msgkey\x18\x02 \x01(\x0b\x32\x0f.SyncKey.MsgKey\x1aY\n\x06MsgKey\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12 \n\x03key\x18\x02 \x03(\x0b\x32\x13.SyncKey.MsgKey.Key\x1a \n\x03Key\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x03\"]\n\ncommon_msg\x12\x0c\n\x04type\x18\x01 \x01(\x05\x12\x1e\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x10.common_msg.Data\x1a!\n\x04\x44\x61ta\x12\x0b\n\x03len\x18\x01 \x01(\x05\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\"\x12\n\x04Wxid\x12\n\n\x02id\x18\x01 \x01(\t\"\x97\x02\n\x03Msg\x12\x10\n\x08serverid\x18\x01 \x01(\x03\x12\x16\n\x07\x66rom_id\x18\x02 \x01(\x0b\x32\x05.Wxid\x12\x14\n\x05to_id\x18\x03 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04type\x18\x04 \x01(\x05\x12\x1c\n\x03raw\x18\x05 \x01(\x0b\x32\x0f.Msg.RawContent\x12\x0e\n\x06status\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x0c\x12\x12\n\ncreateTime\x18\t \x01(\x05\x12\x12\n\nanticlient\x18\n \x01(\t\x12\x12\n\nxmlContent\x18\x0b \x01(\t\x12\r\n\x05svrId\x18\x0c \x01(\x03\x12\x0e\n\x06msgKey\x18\r \x01(\x05\x1a\x1d\n\nRawContent\x12\x0f\n\x07\x63ontent\x18\x01 \x01(\t\"\xef\n\n\x0c\x63ontact_info\x12\x13\n\x04wxid\x18\x01 \x01(\x0b\x32\x05.Wxid\x12(\n\x08nickname\x18\x02 \x01(\x0b\x32\x16.contact_info.NickName\x12\'\n\x07shortPy\x18\x03 \x01(\x0b\x32\x16.contact_info.PY_SHORT\x12&\n\x07quanpin\x18\x04 \x01(\x0b\x32\x15.contact_info.QuanPin\x12\x0b\n\x03sex\x18\x05 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\t\x12\x0c\n\x04tag7\x18\x07 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x05\x12\x0c\n\x04tag9\x18\t \x01(\x05\x12)\n\x0bremark_name\x18\n \x01(\x0b\x32\x14.contact_info.BeiZhu\x12\x31\n\x0creal_shortPy\x18\x0b \x01(\x0b\x32\x1b.contact_info.REAL_PY_SHORT\x12\x30\n\x0creal_quanpin\x18\x0c \x01(\x0b\x32\x1a.contact_info.REAL_QuanPin\x12\r\n\x05tag13\x18\r \x01(\x05\x12\r\n\x05tag14\x18\x0e \x01(\x05\x12\r\n\x05tag16\x18\x10 \x01(\t\x12\x11\n\tbChatRoom\x18\x11 \x01(\x05\x12\r\n\x05tag18\x18\x12 \x01(\x05\x12\r\n\x05sheng\x18\x13 \x01(\t\x12\x0b\n\x03shi\x18\x14 \x01(\t\x12\x10\n\x08qianming\x18\x15 \x01(\t\x12\r\n\x05tag22\x18\x16 \x01(\x05\x12\r\n\x05tag23\x18\x17 \x01(\x05\x12\x1a\n\x12register_body_type\x18\x18 \x01(\x05\x12\x15\n\rregister_body\x18\x19 \x01(\t\x12\r\n\x05tag26\x18\x1a \x01(\x05\x12\x0b\n\x03src\x18\x1b \x01(\x05\x12\x13\n\x0blastMsgTime\x18\x1d \x01(\t\x12\r\n\x05\x61lias\x18\x1e \x01(\t\x12\x19\n\x11\x63hatroomOwnerWxid\x18\x1f \x01(\t\x12\r\n\x05tag33\x18! \x01(\x05\x12\r\n\x05tag34\x18\" \x01(\x05\x12\r\n\x05tag35\x18# \x01(\x05\x12\r\n\x05tag37\x18% \x01(\x0c\x12\x0f\n\x07\x63ountry\x18& \x01(\t\x12\x12\n\navatar_big\x18\' \x01(\t\x12\x14\n\x0c\x61vatar_small\x18( \x01(\t\x12\r\n\x05tag42\x18* \x01(\x0c\x12\x0f\n\x07v1_name\x18- \x01(\t\x12\r\n\x05tag50\x18\x32 \x01(\x0c\x12\x1a\n\x12\x63hatroom_serverVer\x18\x35 \x01(\x05\x12\x1b\n\x13\x63hatroom_max_member\x18\x37 \x01(\x05\x12\r\n\x05tag56\x18\x38 \x01(\x05\x12\x38\n\x11group_member_list\x18\x39 \x01(\x0b\x32\x1d.contact_info.GroupMemberList\x12\r\n\x05tag58\x18: \x01(\x05\x12\r\n\x05tag62\x18> \x01(\x0c\x12\r\n\x05tag64\x18@ \x01(\x05\x12\r\n\x05tag65\x18\x41 \x01(\x05\x12\r\n\x05tag66\x18\x42 \x01(\x05\x12\r\n\x05tag67\x18\x43 \x01(\x05\x1a\x18\n\x08NickName\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x18\n\x08PY_SHORT\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x17\n\x07QuanPin\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x16\n\x06\x42\x65iZhu\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x1d\n\rREAL_PY_SHORT\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\x1c\n\x0cREAL_QuanPin\x12\x0c\n\x04name\x18\x01 \x01(\t\x1a\xac\x01\n\x0fGroupMemberList\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12\x38\n\x06member\x18\x02 \x03(\x0b\x32(.contact_info.GroupMemberList.MemberInfo\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x0c\n\x04tag4\x18\x04 \x01(\t\x1a\x36\n\nMemberInfo\x12\x0c\n\x04wxid\x18\x01 \x01(\t\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0c\n\x04tag8\x18\x08 \x01(\x05\"\xc6\x02\n\x18ManualAuthAccountRequest\x12-\n\x03\x61\x65s\x18\x01 \x02(\x0b\x32 .ManualAuthAccountRequest.AesKey\x12,\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\x1e.ManualAuthAccountRequest.Ecdh\x12\x10\n\x08userName\x18\x03 \x02(\t\x12\x11\n\tpassword1\x18\x04 \x02(\t\x12\x11\n\tpassword2\x18\x05 \x02(\t\x1a\"\n\x06\x41\x65sKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\x1aq\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12\x37\n\x07\x65\x63\x64hKey\x18\x02 \x02(\x0b\x32&.ManualAuthAccountRequest.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x02(\x0c\"\x91\x05\n\x17ManualAuthDeviceRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12,\n\x04tag2\x18\x02 \x01(\x0b\x32\x1e.ManualAuthDeviceRequest._Tag2\x12\x0c\n\x04imei\x18\x03 \x01(\t\x12\x13\n\x0bsoftInfoXml\x18\x04 \x01(\t\x12\x10\n\x08unknown5\x18\x05 \x01(\x05\x12\x13\n\x0b\x63lientSeqID\x18\x06 \x01(\t\x12\x18\n\x10\x63lientSeqID_sign\x18\x07 \x01(\t\x12\x17\n\x0floginDeviceName\x18\x08 \x01(\t\x12\x15\n\rdeviceInfoXml\x18\t \x01(\t\x12\x10\n\x08language\x18\n \x01(\t\x12\x10\n\x08timeZone\x18\x0b \x01(\t\x12\x11\n\tunknown13\x18\r \x01(\x05\x12\x11\n\tunknown14\x18\x0e \x01(\x05\x12\x13\n\x0b\x64\x65viceBrand\x18\x0f \x01(\t\x12\x13\n\x0b\x64\x65viceModel\x18\x10 \x01(\t\x12\x0e\n\x06osType\x18\x11 \x01(\t\x12\x13\n\x0brealCountry\x18\x12 \x01(\t\x12\x11\n\tunknown22\x18\x16 \x01(\x05\x1a\xec\x01\n\x05_Tag2\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x33\n\x04tag2\x18\x02 \x01(\x0b\x32%.ManualAuthDeviceRequest._Tag2.__Tag2\x12\x14\n\x04tag3\x18\x03 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\x12\x14\n\x04tag5\x18\x05 \x01(\x0b\x32\x06.mmStr\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x1aH\n\x06__Tag2\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x0c\n\x04tag2\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\t\x12\x14\n\x04tag4\x18\x04 \x01(\x0b\x32\x06.mmStr\"\xd3\x07\n\x12ManualAuthResponse\x12.\n\x06result\x18\x01 \x02(\x0b\x32\x1e.ManualAuthResponse.AuthResult\x12\x11\n\tunifyFlag\x18\x02 \x02(\x05\x12\x30\n\tauthParam\x18\x03 \x02(\x0b\x32\x1d.ManualAuthResponse.AuthParam\x12\x34\n\x0b\x61\x63\x63ountInfo\x18\x04 \x01(\x0b\x32\x1f.ManualAuthResponse.AccountInfo\x12\x0f\n\x07\x64nsInfo\x18\x05 \x01(\x0c\x1ai\n\nAuthResult\x12\x0c\n\x04\x63ode\x18\x01 \x02(\x05\x12\x36\n\x07\x65rr_msg\x18\x02 \x02(\x0b\x32%.ManualAuthResponse.AuthResult.ErrMsg\x1a\x15\n\x06\x45rrMsg\x12\x0b\n\x03msg\x18\x01 \x01(\t\x1a\xe5\x02\n\tAuthParam\x12\x0b\n\x03uin\x18\x01 \x02(\x05\x12\x30\n\x04\x65\x63\x64h\x18\x02 \x02(\x0b\x32\".ManualAuthResponse.AuthParam.Ecdh\x12\x39\n\x07session\x18\x03 \x02(\x0b\x32(.ManualAuthResponse.AuthParam.SessionKey\x12\x11\n\tSmsTicket\x18\x10 \x01(\x0c\x12\x18\n\x10\x62indMailLoginUrl\x18\x14 \x01(\t\x12\x12\n\nserverTime\x18\x16 \x01(\x05\x1au\n\x04\x45\x63\x64h\x12\x0b\n\x03nid\x18\x01 \x02(\x05\x12;\n\x07\x65\x63\x64hKey\x18\x02 \x01(\x0b\x32*.ManualAuthResponse.AuthParam.Ecdh.EcdhKey\x1a#\n\x07\x45\x63\x64hKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a&\n\nSessionKey\x12\x0b\n\x03len\x18\x01 \x02(\x05\x12\x0b\n\x03key\x18\x02 \x01(\x0c\x1a\xad\x02\n\x0b\x41\x63\x63ountInfo\x12\x0c\n\x04wxId\x18\x01 \x01(\t\x12\x10\n\x08nickName\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08\x62indMail\x18\x04 \x01(\t\x12\x12\n\nbindMobile\x18\x05 \x01(\t\x12\r\n\x05\x41lias\x18\x06 \x01(\t\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x0e\n\x06status\x18\x08 \x01(\x05\x12\x12\n\npluginFlag\x18\t \x01(\x05\x12\x14\n\x0cregisterType\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\t\x12\x12\n\nsafeDevice\x18\x0c \x01(\x05\x12\x1a\n\x12officialNamePinyin\x18\r \x01(\t\x12\x16\n\x0eofficialNameZh\x18\x0e \x01(\t\x12\r\n\x05tag15\x18\x0f \x01(\t\x12\r\n\x05\x66sUrl\x18\x10 \x01(\t\"w\n\x0eNewInitRequest\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12\x0c\n\x04wxid\x18\x02 \x01(\t\x12\x14\n\x0csync_key_cur\x18\x03 \x01(\x0c\x12\x14\n\x0csync_key_max\x18\x04 \x01(\x0c\x12\x10\n\x08language\x18\x05 \x01(\t\"\x8e\x01\n\x0fNewInitResponse\x12\x0c\n\x04tag1\x18\x01 \x01(\t\x12\x14\n\x0csync_key_cur\x18\x02 \x01(\x0c\x12\x14\n\x0csync_key_max\x18\x03 \x01(\x0c\x12\x15\n\rcontinue_flag\x18\x04 \x01(\x05\x12\x0f\n\x07\x63ntList\x18\x06 \x01(\x05\x12\x19\n\x04tag7\x18\x07 \x03(\x0b\x32\x0b.common_msg\"\xb4\x01\n\x0cnew_sync_req\x12)\n\x04\x66lag\x18\x01 \x01(\x0b\x32\x1b.new_sync_req.continue_flag\x12\x10\n\x08selector\x18\x02 \x01(\x05\x12\x10\n\x08sync_Key\x18\x03 \x01(\x0c\x12\r\n\x05scene\x18\x04 \x01(\x05\x12\x0e\n\x06\x64\x65vice\x18\x05 \x01(\t\x12\x17\n\x0fsync_msg_digest\x18\x06 \x01(\x05\x1a\x1d\n\rcontinue_flag\x12\x0c\n\x04\x66lag\x18\x01 \x01(\x05\"\xc2\x01\n\rnew_sync_resp\x12\x0c\n\x04tag1\x18\x01 \x01(\x05\x12#\n\x03msg\x18\x02 \x01(\x0b\x32\x16.new_sync_resp.new_msg\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x10\n\x08sync_key\x18\x04 \x01(\x0c\x12\x0c\n\x04tag5\x18\x05 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x1a\x35\n\x07new_msg\x12\x0f\n\x07\x63ntList\x18\x01 \x01(\x05\x12\x19\n\x04tag2\x18\x02 \x03(\x0b\x32\x0b.common_msg\"\xa6\x01\n\x10new_send_msg_req\x12\x0b\n\x03\x63nt\x18\x01 \x01(\x05\x12\'\n\x03msg\x18\x02 \x01(\x0b\x32\x1a.new_send_msg_req.msg_info\x1a\\\n\x08msg_info\x12\x11\n\x02to\x18\x01 \x01(\x0b\x32\x05.Wxid\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\x0c\x12\x0c\n\x04type\x18\x03 \x01(\x05\x12\x0b\n\x03utc\x18\x04 \x01(\x05\x12\x11\n\tclient_id\x18\x05 \x01(\x05\"\xa6\x01\n\x11new_send_msg_resp\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x0b\n\x03\x63nt\x18\x02 \x01(\x05\x12&\n\x03res\x18\x03 \x01(\x0b\x32\x19.new_send_msg_resp.result\x1a\x46\n\x06result\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x11\n\x02to\x18\x02 \x01(\x0b\x32\x05.Wxid\x12\x0c\n\x04type\x18\x07 \x01(\x05\x12\r\n\x05svrid\x18\x08 \x01(\x03\"\xed\x02\n\x14new_send_app_msg_req\x12\x19\n\x05login\x18\x01 \x01(\x0b\x32\n.LoginInfo\x12/\n\x04info\x18\x02 \x01(\x0b\x32!.new_send_app_msg_req.appmsg_info\x12\x0c\n\x04tag4\x18\x04 \x01(\x05\x12\x0c\n\x04tag6\x18\x06 \x01(\x05\x12\x0c\n\x04tag7\x18\x07 \x01(\t\x12\x11\n\tfromScene\x18\x08 \x01(\t\x12\x0c\n\x04tag9\x18\t \x01(\x05\x12\r\n\x05tag10\x18\n \x01(\x05\x1a\xae\x01\n\x0b\x61ppmsg_info\x12\x11\n\tfrom_wxid\x18\x01 \x01(\t\x12\x10\n\x08\x61pp_wxid\x18\x02 \x01(\t\x12\x0c\n\x04tag3\x18\x03 \x01(\x05\x12\x0f\n\x07to_wxid\x18\x04 \x01(\t\x12\x0c\n\x04type\x18\x05 \x01(\x05\x12\x0f\n\x07\x63ontent\x18\x06 \x01(\t\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x12\x11\n\tclient_id\x18\x08 \x01(\t\x12\r\n\x05tag10\x18\n \x01(\x05\x12\r\n\x05tag11\x18\x0b \x01(\x05\"\xa3\x01\n\x15new_send_app_msg_resp\x12\x14\n\x04tag1\x18\x01 \x01(\x0b\x32\x06.mmStr\x12\x11\n\tfrom_wxid\x18\x03 \x01(\t\x12\x0f\n\x07to_wxid\x18\x04 \x01(\t\x12\x13\n\x0bsync_key_id\x18\x05 \x01(\x05\x12\x11\n\tclient_id\x18\x06 \x01(\t\x12\x0b\n\x03utc\x18\x07 \x01(\x05\x12\x0c\n\x04type\x18\x08 \x01(\x05\x12\r\n\x05svrid\x18\t \x01(\x05')
 )
 
 
@@ -492,6 +492,648 @@ _MSG = _descriptor.Descriptor(
 )
 
 
+_CONTACT_INFO_NICKNAME = _descriptor.Descriptor(
+  name='NickName',
+  full_name='contact_info.NickName',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='contact_info.NickName.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1762,
+  serialized_end=1786,
+)
+
+_CONTACT_INFO_PY_SHORT = _descriptor.Descriptor(
+  name='PY_SHORT',
+  full_name='contact_info.PY_SHORT',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='contact_info.PY_SHORT.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1788,
+  serialized_end=1812,
+)
+
+_CONTACT_INFO_QUANPIN = _descriptor.Descriptor(
+  name='QuanPin',
+  full_name='contact_info.QuanPin',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='contact_info.QuanPin.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1814,
+  serialized_end=1837,
+)
+
+_CONTACT_INFO_BEIZHU = _descriptor.Descriptor(
+  name='BeiZhu',
+  full_name='contact_info.BeiZhu',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='contact_info.BeiZhu.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1839,
+  serialized_end=1861,
+)
+
+_CONTACT_INFO_REAL_PY_SHORT = _descriptor.Descriptor(
+  name='REAL_PY_SHORT',
+  full_name='contact_info.REAL_PY_SHORT',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='contact_info.REAL_PY_SHORT.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1863,
+  serialized_end=1892,
+)
+
+_CONTACT_INFO_REAL_QUANPIN = _descriptor.Descriptor(
+  name='REAL_QuanPin',
+  full_name='contact_info.REAL_QuanPin',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='name', full_name='contact_info.REAL_QuanPin.name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1894,
+  serialized_end=1922,
+)
+
+_CONTACT_INFO_GROUPMEMBERLIST_MEMBERINFO = _descriptor.Descriptor(
+  name='MemberInfo',
+  full_name='contact_info.GroupMemberList.MemberInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='wxid', full_name='contact_info.GroupMemberList.MemberInfo.wxid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag6', full_name='contact_info.GroupMemberList.MemberInfo.tag6', index=1,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag8', full_name='contact_info.GroupMemberList.MemberInfo.tag8', index=2,
+      number=8, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2043,
+  serialized_end=2097,
+)
+
+_CONTACT_INFO_GROUPMEMBERLIST = _descriptor.Descriptor(
+  name='GroupMemberList',
+  full_name='contact_info.GroupMemberList',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='cnt', full_name='contact_info.GroupMemberList.cnt', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='member', full_name='contact_info.GroupMemberList.member', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag3', full_name='contact_info.GroupMemberList.tag3', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag4', full_name='contact_info.GroupMemberList.tag4', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CONTACT_INFO_GROUPMEMBERLIST_MEMBERINFO, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1925,
+  serialized_end=2097,
+)
+
+_CONTACT_INFO = _descriptor.Descriptor(
+  name='contact_info',
+  full_name='contact_info',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='wxid', full_name='contact_info.wxid', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='nickname', full_name='contact_info.nickname', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='shortPy', full_name='contact_info.shortPy', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='quanpin', full_name='contact_info.quanpin', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sex', full_name='contact_info.sex', index=4,
+      number=5, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag6', full_name='contact_info.tag6', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag7', full_name='contact_info.tag7', index=6,
+      number=7, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag8', full_name='contact_info.tag8', index=7,
+      number=8, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag9', full_name='contact_info.tag9', index=8,
+      number=9, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='remark_name', full_name='contact_info.remark_name', index=9,
+      number=10, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='real_shortPy', full_name='contact_info.real_shortPy', index=10,
+      number=11, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='real_quanpin', full_name='contact_info.real_quanpin', index=11,
+      number=12, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag13', full_name='contact_info.tag13', index=12,
+      number=13, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag14', full_name='contact_info.tag14', index=13,
+      number=14, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag16', full_name='contact_info.tag16', index=14,
+      number=16, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='bChatRoom', full_name='contact_info.bChatRoom', index=15,
+      number=17, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag18', full_name='contact_info.tag18', index=16,
+      number=18, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='sheng', full_name='contact_info.sheng', index=17,
+      number=19, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='shi', full_name='contact_info.shi', index=18,
+      number=20, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='qianming', full_name='contact_info.qianming', index=19,
+      number=21, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag22', full_name='contact_info.tag22', index=20,
+      number=22, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag23', full_name='contact_info.tag23', index=21,
+      number=23, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='register_body_type', full_name='contact_info.register_body_type', index=22,
+      number=24, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='register_body', full_name='contact_info.register_body', index=23,
+      number=25, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag26', full_name='contact_info.tag26', index=24,
+      number=26, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='src', full_name='contact_info.src', index=25,
+      number=27, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='lastMsgTime', full_name='contact_info.lastMsgTime', index=26,
+      number=29, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='alias', full_name='contact_info.alias', index=27,
+      number=30, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='chatroomOwnerWxid', full_name='contact_info.chatroomOwnerWxid', index=28,
+      number=31, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag33', full_name='contact_info.tag33', index=29,
+      number=33, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag34', full_name='contact_info.tag34', index=30,
+      number=34, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag35', full_name='contact_info.tag35', index=31,
+      number=35, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag37', full_name='contact_info.tag37', index=32,
+      number=37, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='country', full_name='contact_info.country', index=33,
+      number=38, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='avatar_big', full_name='contact_info.avatar_big', index=34,
+      number=39, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='avatar_small', full_name='contact_info.avatar_small', index=35,
+      number=40, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag42', full_name='contact_info.tag42', index=36,
+      number=42, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='v1_name', full_name='contact_info.v1_name', index=37,
+      number=45, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag50', full_name='contact_info.tag50', index=38,
+      number=50, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='chatroom_serverVer', full_name='contact_info.chatroom_serverVer', index=39,
+      number=53, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='chatroom_max_member', full_name='contact_info.chatroom_max_member', index=40,
+      number=55, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag56', full_name='contact_info.tag56', index=41,
+      number=56, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='group_member_list', full_name='contact_info.group_member_list', index=42,
+      number=57, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag58', full_name='contact_info.tag58', index=43,
+      number=58, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag62', full_name='contact_info.tag62', index=44,
+      number=62, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag64', full_name='contact_info.tag64', index=45,
+      number=64, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag65', full_name='contact_info.tag65', index=46,
+      number=65, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag66', full_name='contact_info.tag66', index=47,
+      number=66, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tag67', full_name='contact_info.tag67', index=48,
+      number=67, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_CONTACT_INFO_NICKNAME, _CONTACT_INFO_PY_SHORT, _CONTACT_INFO_QUANPIN, _CONTACT_INFO_BEIZHU, _CONTACT_INFO_REAL_PY_SHORT, _CONTACT_INFO_REAL_QUANPIN, _CONTACT_INFO_GROUPMEMBERLIST, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=706,
+  serialized_end=2097,
+)
+
+
 _MANUALAUTHACCOUNTREQUEST_AESKEY = _descriptor.Descriptor(
   name='AesKey',
   full_name='ManualAuthAccountRequest.AesKey',
@@ -525,8 +1167,8 @@ _MANUALAUTHACCOUNTREQUEST_AESKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=883,
-  serialized_end=917,
+  serialized_start=2277,
+  serialized_end=2311,
 )
 
 _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY = _descriptor.Descriptor(
@@ -562,8 +1204,8 @@ _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=997,
-  serialized_end=1032,
+  serialized_start=2391,
+  serialized_end=2426,
 )
 
 _MANUALAUTHACCOUNTREQUEST_ECDH = _descriptor.Descriptor(
@@ -599,8 +1241,8 @@ _MANUALAUTHACCOUNTREQUEST_ECDH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=919,
-  serialized_end=1032,
+  serialized_start=2313,
+  serialized_end=2426,
 )
 
 _MANUALAUTHACCOUNTREQUEST = _descriptor.Descriptor(
@@ -657,8 +1299,8 @@ _MANUALAUTHACCOUNTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=706,
-  serialized_end=1032,
+  serialized_start=2100,
+  serialized_end=2426,
 )
 
 
@@ -709,8 +1351,8 @@ _MANUALAUTHDEVICEREQUEST__TAG2___TAG2 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1620,
-  serialized_end=1692,
+  serialized_start=3014,
+  serialized_end=3086,
 )
 
 _MANUALAUTHDEVICEREQUEST__TAG2 = _descriptor.Descriptor(
@@ -774,8 +1416,8 @@ _MANUALAUTHDEVICEREQUEST__TAG2 = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1456,
-  serialized_end=1692,
+  serialized_start=2850,
+  serialized_end=3086,
 )
 
 _MANUALAUTHDEVICEREQUEST = _descriptor.Descriptor(
@@ -923,8 +1565,8 @@ _MANUALAUTHDEVICEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1035,
-  serialized_end=1692,
+  serialized_start=2429,
+  serialized_end=3086,
 )
 
 
@@ -954,8 +1596,8 @@ _MANUALAUTHRESPONSE_AUTHRESULT_ERRMSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1989,
-  serialized_end=2010,
+  serialized_start=3383,
+  serialized_end=3404,
 )
 
 _MANUALAUTHRESPONSE_AUTHRESULT = _descriptor.Descriptor(
@@ -991,8 +1633,8 @@ _MANUALAUTHRESPONSE_AUTHRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1905,
-  serialized_end=2010,
+  serialized_start=3299,
+  serialized_end=3404,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM_ECDH_ECDHKEY = _descriptor.Descriptor(
@@ -1028,8 +1670,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM_ECDH_ECDHKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2295,
-  serialized_end=2330,
+  serialized_start=3689,
+  serialized_end=3724,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM_ECDH = _descriptor.Descriptor(
@@ -1065,8 +1707,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM_ECDH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2213,
-  serialized_end=2330,
+  serialized_start=3607,
+  serialized_end=3724,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM_SESSIONKEY = _descriptor.Descriptor(
@@ -1102,8 +1744,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM_SESSIONKEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2332,
-  serialized_end=2370,
+  serialized_start=3726,
+  serialized_end=3764,
 )
 
 _MANUALAUTHRESPONSE_AUTHPARAM = _descriptor.Descriptor(
@@ -1167,8 +1809,8 @@ _MANUALAUTHRESPONSE_AUTHPARAM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2013,
-  serialized_end=2370,
+  serialized_start=3407,
+  serialized_end=3764,
 )
 
 _MANUALAUTHRESPONSE_ACCOUNTINFO = _descriptor.Descriptor(
@@ -1302,8 +1944,8 @@ _MANUALAUTHRESPONSE_ACCOUNTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2373,
-  serialized_end=2674,
+  serialized_start=3767,
+  serialized_end=4068,
 )
 
 _MANUALAUTHRESPONSE = _descriptor.Descriptor(
@@ -1360,8 +2002,8 @@ _MANUALAUTHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1695,
-  serialized_end=2674,
+  serialized_start=3089,
+  serialized_end=4068,
 )
 
 
@@ -1387,16 +2029,16 @@ _NEWINITREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='tag3', full_name='NewInitRequest.tag3', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='sync_key_cur', full_name='NewInitRequest.sync_key_cur', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='tag4', full_name='NewInitRequest.tag4', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='sync_key_max', full_name='NewInitRequest.sync_key_max', index=3,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
@@ -1419,8 +2061,8 @@ _NEWINITREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2676,
-  serialized_end=2795,
+  serialized_start=4070,
+  serialized_end=4189,
 )
 
 
@@ -1439,28 +2081,35 @@ _NEWINITRESPONSE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='sync_key', full_name='NewInitResponse.sync_key', index=1,
+      name='sync_key_cur', full_name='NewInitResponse.sync_key_cur', index=1,
       number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='sync_key2', full_name='NewInitResponse.sync_key2', index=2,
+      name='sync_key_max', full_name='NewInitResponse.sync_key_max', index=2,
       number=3, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cntList', full_name='NewInitResponse.cntList', index=3,
+      name='continue_flag', full_name='NewInitResponse.continue_flag', index=3,
+      number=4, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='cntList', full_name='NewInitResponse.cntList', index=4,
       number=6, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='tag7', full_name='NewInitResponse.tag7', index=4,
+      name='tag7', full_name='NewInitResponse.tag7', index=5,
       number=7, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1478,8 +2127,8 @@ _NEWINITRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2797,
-  serialized_end=2909,
+  serialized_start=4192,
+  serialized_end=4334,
 )
 
 
@@ -1509,8 +2158,8 @@ _NEW_SYNC_REQ_CONTINUE_FLAG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3063,
-  serialized_end=3092,
+  serialized_start=4488,
+  serialized_end=4517,
 )
 
 _NEW_SYNC_REQ = _descriptor.Descriptor(
@@ -1574,8 +2223,8 @@ _NEW_SYNC_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2912,
-  serialized_end=3092,
+  serialized_start=4337,
+  serialized_end=4517,
 )
 
 
@@ -1612,8 +2261,8 @@ _NEW_SYNC_RESP_NEW_MSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3236,
-  serialized_end=3289,
+  serialized_start=4661,
+  serialized_end=4714,
 )
 
 _NEW_SYNC_RESP = _descriptor.Descriptor(
@@ -1684,8 +2333,8 @@ _NEW_SYNC_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3095,
-  serialized_end=3289,
+  serialized_start=4520,
+  serialized_end=4714,
 )
 
 
@@ -1743,8 +2392,8 @@ _NEW_SEND_MSG_REQ_MSG_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3366,
-  serialized_end=3458,
+  serialized_start=4791,
+  serialized_end=4883,
 )
 
 _NEW_SEND_MSG_REQ = _descriptor.Descriptor(
@@ -1780,8 +2429,8 @@ _NEW_SEND_MSG_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3292,
-  serialized_end=3458,
+  serialized_start=4717,
+  serialized_end=4883,
 )
 
 
@@ -1832,8 +2481,8 @@ _NEW_SEND_MSG_RESP_RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3557,
-  serialized_end=3627,
+  serialized_start=4982,
+  serialized_end=5052,
 )
 
 _NEW_SEND_MSG_RESP = _descriptor.Descriptor(
@@ -1876,8 +2525,8 @@ _NEW_SEND_MSG_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3461,
-  serialized_end=3627,
+  serialized_start=4886,
+  serialized_end=5052,
 )
 
 
@@ -1970,8 +2619,8 @@ _NEW_SEND_APP_MSG_REQ_APPMSG_INFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3821,
-  serialized_end=3995,
+  serialized_start=5246,
+  serialized_end=5420,
 )
 
 _NEW_SEND_APP_MSG_REQ = _descriptor.Descriptor(
@@ -2049,8 +2698,8 @@ _NEW_SEND_APP_MSG_REQ = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3630,
-  serialized_end=3995,
+  serialized_start=5055,
+  serialized_end=5420,
 )
 
 
@@ -2129,8 +2778,8 @@ _NEW_SEND_APP_MSG_RESP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3998,
-  serialized_end=4161,
+  serialized_start=5423,
+  serialized_end=5586,
 )
 
 _SYNCKEY_MSGKEY_KEY.containing_type = _SYNCKEY_MSGKEY
@@ -2143,6 +2792,23 @@ _MSG_RAWCONTENT.containing_type = _MSG
 _MSG.fields_by_name['from_id'].message_type = _WXID
 _MSG.fields_by_name['to_id'].message_type = _WXID
 _MSG.fields_by_name['raw'].message_type = _MSG_RAWCONTENT
+_CONTACT_INFO_NICKNAME.containing_type = _CONTACT_INFO
+_CONTACT_INFO_PY_SHORT.containing_type = _CONTACT_INFO
+_CONTACT_INFO_QUANPIN.containing_type = _CONTACT_INFO
+_CONTACT_INFO_BEIZHU.containing_type = _CONTACT_INFO
+_CONTACT_INFO_REAL_PY_SHORT.containing_type = _CONTACT_INFO
+_CONTACT_INFO_REAL_QUANPIN.containing_type = _CONTACT_INFO
+_CONTACT_INFO_GROUPMEMBERLIST_MEMBERINFO.containing_type = _CONTACT_INFO_GROUPMEMBERLIST
+_CONTACT_INFO_GROUPMEMBERLIST.fields_by_name['member'].message_type = _CONTACT_INFO_GROUPMEMBERLIST_MEMBERINFO
+_CONTACT_INFO_GROUPMEMBERLIST.containing_type = _CONTACT_INFO
+_CONTACT_INFO.fields_by_name['wxid'].message_type = _WXID
+_CONTACT_INFO.fields_by_name['nickname'].message_type = _CONTACT_INFO_NICKNAME
+_CONTACT_INFO.fields_by_name['shortPy'].message_type = _CONTACT_INFO_PY_SHORT
+_CONTACT_INFO.fields_by_name['quanpin'].message_type = _CONTACT_INFO_QUANPIN
+_CONTACT_INFO.fields_by_name['remark_name'].message_type = _CONTACT_INFO_BEIZHU
+_CONTACT_INFO.fields_by_name['real_shortPy'].message_type = _CONTACT_INFO_REAL_PY_SHORT
+_CONTACT_INFO.fields_by_name['real_quanpin'].message_type = _CONTACT_INFO_REAL_QUANPIN
+_CONTACT_INFO.fields_by_name['group_member_list'].message_type = _CONTACT_INFO_GROUPMEMBERLIST
 _MANUALAUTHACCOUNTREQUEST_AESKEY.containing_type = _MANUALAUTHACCOUNTREQUEST
 _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY.containing_type = _MANUALAUTHACCOUNTREQUEST_ECDH
 _MANUALAUTHACCOUNTREQUEST_ECDH.fields_by_name['ecdhKey'].message_type = _MANUALAUTHACCOUNTREQUEST_ECDH_ECDHKEY
@@ -2174,8 +2840,6 @@ _MANUALAUTHRESPONSE.fields_by_name['result'].message_type = _MANUALAUTHRESPONSE_
 _MANUALAUTHRESPONSE.fields_by_name['authParam'].message_type = _MANUALAUTHRESPONSE_AUTHPARAM
 _MANUALAUTHRESPONSE.fields_by_name['accountInfo'].message_type = _MANUALAUTHRESPONSE_ACCOUNTINFO
 _NEWINITREQUEST.fields_by_name['login'].message_type = _LOGININFO
-_NEWINITREQUEST.fields_by_name['tag3'].message_type = _MMSTR
-_NEWINITREQUEST.fields_by_name['tag4'].message_type = _MMSTR
 _NEWINITRESPONSE.fields_by_name['tag7'].message_type = _COMMON_MSG
 _NEW_SYNC_REQ_CONTINUE_FLAG.containing_type = _NEW_SYNC_REQ
 _NEW_SYNC_REQ.fields_by_name['flag'].message_type = _NEW_SYNC_REQ_CONTINUE_FLAG
@@ -2199,6 +2863,7 @@ DESCRIPTOR.message_types_by_name['SyncKey'] = _SYNCKEY
 DESCRIPTOR.message_types_by_name['common_msg'] = _COMMON_MSG
 DESCRIPTOR.message_types_by_name['Wxid'] = _WXID
 DESCRIPTOR.message_types_by_name['Msg'] = _MSG
+DESCRIPTOR.message_types_by_name['contact_info'] = _CONTACT_INFO
 DESCRIPTOR.message_types_by_name['ManualAuthAccountRequest'] = _MANUALAUTHACCOUNTREQUEST
 DESCRIPTOR.message_types_by_name['ManualAuthDeviceRequest'] = _MANUALAUTHDEVICEREQUEST
 DESCRIPTOR.message_types_by_name['ManualAuthResponse'] = _MANUALAUTHRESPONSE
@@ -2285,6 +2950,77 @@ Msg = _reflection.GeneratedProtocolMessageType('Msg', (_message.Message,), dict(
   ))
 _sym_db.RegisterMessage(Msg)
 _sym_db.RegisterMessage(Msg.RawContent)
+
+contact_info = _reflection.GeneratedProtocolMessageType('contact_info', (_message.Message,), dict(
+
+  NickName = _reflection.GeneratedProtocolMessageType('NickName', (_message.Message,), dict(
+    DESCRIPTOR = _CONTACT_INFO_NICKNAME,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:contact_info.NickName)
+    ))
+  ,
+
+  PY_SHORT = _reflection.GeneratedProtocolMessageType('PY_SHORT', (_message.Message,), dict(
+    DESCRIPTOR = _CONTACT_INFO_PY_SHORT,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:contact_info.PY_SHORT)
+    ))
+  ,
+
+  QuanPin = _reflection.GeneratedProtocolMessageType('QuanPin', (_message.Message,), dict(
+    DESCRIPTOR = _CONTACT_INFO_QUANPIN,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:contact_info.QuanPin)
+    ))
+  ,
+
+  BeiZhu = _reflection.GeneratedProtocolMessageType('BeiZhu', (_message.Message,), dict(
+    DESCRIPTOR = _CONTACT_INFO_BEIZHU,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:contact_info.BeiZhu)
+    ))
+  ,
+
+  REAL_PY_SHORT = _reflection.GeneratedProtocolMessageType('REAL_PY_SHORT', (_message.Message,), dict(
+    DESCRIPTOR = _CONTACT_INFO_REAL_PY_SHORT,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:contact_info.REAL_PY_SHORT)
+    ))
+  ,
+
+  REAL_QuanPin = _reflection.GeneratedProtocolMessageType('REAL_QuanPin', (_message.Message,), dict(
+    DESCRIPTOR = _CONTACT_INFO_REAL_QUANPIN,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:contact_info.REAL_QuanPin)
+    ))
+  ,
+
+  GroupMemberList = _reflection.GeneratedProtocolMessageType('GroupMemberList', (_message.Message,), dict(
+
+    MemberInfo = _reflection.GeneratedProtocolMessageType('MemberInfo', (_message.Message,), dict(
+      DESCRIPTOR = _CONTACT_INFO_GROUPMEMBERLIST_MEMBERINFO,
+      __module__ = 'mm_pb2'
+      # @@protoc_insertion_point(class_scope:contact_info.GroupMemberList.MemberInfo)
+      ))
+    ,
+    DESCRIPTOR = _CONTACT_INFO_GROUPMEMBERLIST,
+    __module__ = 'mm_pb2'
+    # @@protoc_insertion_point(class_scope:contact_info.GroupMemberList)
+    ))
+  ,
+  DESCRIPTOR = _CONTACT_INFO,
+  __module__ = 'mm_pb2'
+  # @@protoc_insertion_point(class_scope:contact_info)
+  ))
+_sym_db.RegisterMessage(contact_info)
+_sym_db.RegisterMessage(contact_info.NickName)
+_sym_db.RegisterMessage(contact_info.PY_SHORT)
+_sym_db.RegisterMessage(contact_info.QuanPin)
+_sym_db.RegisterMessage(contact_info.BeiZhu)
+_sym_db.RegisterMessage(contact_info.REAL_PY_SHORT)
+_sym_db.RegisterMessage(contact_info.REAL_QuanPin)
+_sym_db.RegisterMessage(contact_info.GroupMemberList)
+_sym_db.RegisterMessage(contact_info.GroupMemberList.MemberInfo)
 
 ManualAuthAccountRequest = _reflection.GeneratedProtocolMessageType('ManualAuthAccountRequest', (_message.Message,), dict(
 

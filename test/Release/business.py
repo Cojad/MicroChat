@@ -201,7 +201,7 @@ def login_buf2Resp(buf,login_aes_key):
     return loginRes.result.code
 
 #首次登录设备初始化组包函数
-def new_init_req2buf():
+def new_init_req2buf(cur=b'',max=b''):
     #protobuf组包
     new_init_request = mm_pb2.NewInitRequest(
         login = mm_pb2.LoginInfo(
@@ -210,11 +210,11 @@ def new_init_req2buf():
             guid = define.__GUID__ + '\0',          #guid以\0结尾
             clientVer = define.__CLIENT_VERSION__,
             androidVer = define.__ANDROID_VER__,
-            unknown = 1,
+            unknown = 3,
         ),
         wxid = Util.wxid,
-        tag3 = mm_pb2.mmStr(),
-        tag4 = mm_pb2.mmStr(),
+        sync_key_cur = cur,
+        sync_key_max = max,
         language = define.__LANGUAGE__,
     )
 
@@ -228,13 +228,14 @@ def new_init_buf2resp(buf):
     res.ParseFromString(UnPack(buf))
 
     #newinit后保存sync key
-    Util.set_sync_key(res.sync_key)
-    logger.debug('sync key len:{}\ndata:{}'.format(len(res.sync_key), Util.b2hex(res.sync_key)))
+    Util.set_sync_key(res.sync_key_cur)                    #newinit结束前不要异步调用newsync
+    logger.debug('newinit sync_key_cur len:{}\ndata:{}'.format(len(res.sync_key_cur), Util.b2hex(res.sync_key_cur)))
+    logger.debug('newinit sync_key_max len:{}\ndata:{}'.format(len(res.sync_key_max), Util.b2hex(res.sync_key_max)))
 
     #初始化数据
-    logger.debug('tag7数量:{}'.format(res.cntList))
+    logger.info('newinit cmd数量:{},是否需要继续初始化:{}'.format(res.cntList,res.continue_flag))
 
-    #未读消息
+    #初始化
     for i in range(res.cntList):
         if 5 == res.tag7[i].type:                           #未读消息
             msg = mm_pb2.Msg()
@@ -245,7 +246,18 @@ def new_init_buf2resp(buf):
                 #将消息存入数据库
                 Util.insert_msg_to_db(msg.serverid,msg.createTime,msg.from_id.id,msg.to_id.id,msg.type,msg.raw.content)
                 logger.info('收到新消息:\ncreate utc time:{}\ntype:{}\nfrom:{}\nto:{}\nraw data:{}\nxml data:{}'.format(Util.utc_to_local_time(msg.createTime), msg.type, msg.from_id.id, msg.to_id.id, msg.raw.content, msg.xmlContent))
-    return
+        elif 2 == res.tag7[i].type:                         #好友列表
+            friend = mm_pb2.contact_info()
+            friend.ParseFromString(res.tag7[i].data.data)
+            if friend.wxid.id.endswith('@chatroom'):        #群聊
+                logger.info('更新好友信息:群聊名:{} 群聊wxid:{} chatroom_serverVer:{} chatroom_max_member:{} 群主:{} 群成员数量:{}'.format(friend.nickname.name,friend.wxid.id,friend.chatroom_serverVer,friend.chatroom_max_member,friend.chatroomOwnerWxid,friend.group_member_list.cnt))
+            elif friend.wxid.id.startswith('gh_'):          #公众号
+                logger.info('更新好友信息:公众号:{} 公众号wxid:{} alias:{} 注册主体:{}'.format(friend.nickname.name,friend.wxid.id,friend.alias,friend.register_body if friend.register_body_type == 24 else '个人'))
+            else:                                           #好友
+                logger.info('更新好友信息:好友:{} 备注名:{} wxid:{} alias:{} 性别:{} 好友来源:{} 个性签名:{}'.format(friend.nickname.name,friend.remark_name.name,friend.wxid.id,friend.alias,friend.sex,Util.get_way(friend.src),friend.qianming))
+            #将好友信息存入数据库
+            Util.insert_contact_info_to_db(friend.wxid.id,friend.nickname.name,friend.remark_name.name,friend.alias,friend.avatar_big,friend.v1_name,friend.sex,friend.country,friend.sheng,friend.shi,friend.qianming,friend.register_body,friend.src,friend.chatroomOwnerWxid,friend.chatroom_serverVer,friend.chatroom_max_member,friend.group_member_list.cnt)
+    return (res.continue_flag,res.sync_key_cur,res.sync_key_max)
 
 #同步消息组包函数
 def new_sync_req2buf():
@@ -270,9 +282,9 @@ def new_sync_buf2resp(buf):
 
     #刷新sync key
     Util.set_sync_key(res.sync_key)
-    logger.debug('sync key len:{}\ndata:{}'.format(len(res.sync_key), Util.b2hex(res.sync_key)))
+    logger.debug('newsync sync_key len:{}\ndata:{}'.format(len(res.sync_key), Util.b2hex(res.sync_key)))
 
-    #未读消息
+    #解析
     for i in range(res.msg.cntList):
         if 5 == res.msg.tag2[i].type:                           #未读消息
             msg = mm_pb2.Msg()
