@@ -87,7 +87,7 @@ def new_sync():
     #解包
     return business.new_sync_buf2resp(ret_bytes)  
 
-#发消息
+#发消息(Utf-8编码)
 def new_send_msg(to_wxid,msg_content,msg_type = 1):
     #组包
     send_data = business.new_send_msg_req2buf(to_wxid,msg_content,msg_type)
@@ -97,20 +97,35 @@ def new_send_msg(to_wxid,msg_content,msg_type = 1):
     logger.debug('new_send_msg返回数据:' + Util.b2hex(ret_bytes))
 
     #解包
-    return business.new_send_msg_buf2resp(ret_bytes)
+    (ret_code,svrid) = business.new_send_msg_buf2resp(ret_bytes)
+
+    #消息记录存入数据库
+    Util.insert_msg_to_db(svrid,Util.get_utc(),Util.wxid,to_wxid,msg_type,msg_content.decode())
+    
+    #返回发送消息结果
+    return ret_code
 
 #分享链接
-def send_app_msg(wxid,title,des,link_url,thumb_url=''):
+def send_app_msg(to_wxid,title,des,link_url,thumb_url=''):
      #组包
-    send_data = business.send_app_msg_req2buf(wxid,title,des,link_url,thumb_url)
+    (send_data,msg_content) = business.send_app_msg_req2buf(to_wxid,title,des,link_url,thumb_url)
 
     #发包
     ret_bytes = Util.mmPost('/cgi-bin/micromsg-bin/sendappmsg',send_data)
     logger.debug('send_app_msg返回数据:' + Util.b2hex(ret_bytes))
-
+    
     #解包
-    return business.send_app_msg_buf2resp(ret_bytes)
+    (ret_code,svrid) = business.send_app_msg_buf2resp(ret_bytes)
 
+    #消息记录存入数据库
+    Util.insert_msg_to_db(svrid,Util.get_utc(),Util.wxid,to_wxid,5,msg_content)
+
+    #返回发送消息结果
+    return ret_code
+
+#获取好友列表(wxid,昵称,备注,alias,v1_name,头像)
+def get_contact_list(contact_type = Util.CONTACT_TYPE_FRIEND):
+    return Util.get_contact(contact_type)
 
 #初始化python模块    
 def InitAll():

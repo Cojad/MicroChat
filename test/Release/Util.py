@@ -30,6 +30,14 @@ headers = {
             "User-Agent": "MicroMessenger Client"
 }
 
+#好友类型
+CONTACT_TYPE_ALL = 0xFFFF                   #所有好友
+CONTACT_TYPE_FRIEND = 1                     #朋友 
+CONTACT_TYPE_CHATROOM = 2                   #群聊
+CONTACT_TYPE_OFFICAL = 4                    #公众号
+CONTACT_TYPE_BLACKLIST = 8                  #黑名单中的好友
+CONTACT_TYPE_DELETED = 16                   #已删除的好友
+
 #长短链接默认地址;调用GetDNS()接口后会存放服务器解析的长短链接ip
 ip = {'longip':'long.weixin.qq.com', 'shortip':'short.weixin.qq.com'}
 
@@ -208,7 +216,7 @@ def init_db():
     #建消息表
     cur.execute('create table if not exists msg(svrid bigint unique,utc integer,createtime varchar(1024),fromWxid varchar(1024),toWxid varchar(1024),type integer,content text(65535))')
     #建联系人表
-    cur.execute('create table if not exists contact(wxid varchar(1024) unique,nick_name varchar(1024),remark_name varchar(1024),alias varchar(1024),avatar_big varchar(1024),v1_name varchar(1024),sex integer,country varchar(1024),sheng varchar(1024),shi varchar(1024),qianming varchar(2048),register_body varchar(1024),src integer,chatroom_owner varchar(1024),chatroom_serverVer integer,chatroom_max_member integer,chatroom_member_cnt integer)')
+    cur.execute('create table if not exists contact(wxid varchar(1024) unique,nick_name varchar(1024),remark_name varchar(1024),alias varchar(1024),avatar_big varchar(1024),v1_name varchar(1024),type integer default(0),sex integer,country varchar(1024),sheng varchar(1024),shi varchar(1024),qianming varchar(2048),register_body varchar(1024),src integer,chatroom_owner varchar(1024),chatroom_serverVer integer,chatroom_max_member integer,chatroom_member_cnt integer)')
     #建sync key表
     cur.execute('create table if not exists synckey(key varchar(4096))')
     return
@@ -237,20 +245,20 @@ def insert_msg_to_db(svrid,utc,from_wxid,to_wxid,type,content):
         cur.execute("insert into msg(svrid,utc,createtime,fromWxid,toWxid,type,content) values('{}','{}','{}','{}','{}','{}','{}')".format(svrid,utc,utc_to_local_time(utc),from_wxid,to_wxid,type,content))
         conn.commit()
     except Exception as e:
-        logger.info('insert_msg_to_db error:{}',str(e))
+        logger.info('insert_msg_to_db error:{}'.format(str(e)))
     return
 
 #保存/刷新好友消息
-def insert_contact_info_to_db(wxid,nick_name,remark_name,alias,avatar_big,v1_name,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt):
+def insert_contact_info_to_db(wxid,nick_name,remark_name,alias,avatar_big,v1_name,type,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt):
     cur = conn.cursor()
     try:
         #先删除旧的信息
         cur.execute("delete from contact where wxid = '{}'".format(wxid))
         #插入最新联系人数据
-        cur.execute("insert into contact(wxid,nick_name,remark_name,alias,avatar_big,v1_name,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt) values('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(wxid,nick_name,remark_name,alias,avatar_big,v1_name,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt))
+        cur.execute("insert into contact(wxid,nick_name,remark_name,alias,avatar_big,v1_name,type,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt) values('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(wxid,nick_name,remark_name,alias,avatar_big,v1_name,type,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt))
         conn.commit()
     except Exception as e:
-        logger.info('insert_contact_info_to_db error:{}',str(e))
+        logger.info('insert_contact_info_to_db error:{}'.format(str(e)))
     return
 
 #utc转本地时间
@@ -272,3 +280,45 @@ def get_way(src):
         elif src:
             return '通过' + define.WAY[src] + '添加'
     return define.WAY[0]
+
+#获取好友类型:
+def get_frient_type(wxid):    
+    cur = conn.cursor()
+    cur.execute("select type from contact where wxid = '{}'".format(wxid))
+    row = cur.fetchone()
+    if row:
+        return row[0]
+    else:
+        return 0
+
+#好友是否已删除
+def is_deleted(type):
+    #type的最后一bit是0表示已被删除
+    return 0 == (type & 1)
+
+#好友是否在黑名单中
+def is_in_blacklist(type):
+    return (type & (1<<3))
+
+#获取好友列表wxid,昵称,备注,alias,v1_name,头像
+def get_contact(contact_type):    
+    cur = conn.cursor()
+    rows = []
+    if contact_type & CONTACT_TYPE_FRIEND:                        #返回好友列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 8) = 0")
+        rows = rows + cur.fetchall()
+    if contact_type & CONTACT_TYPE_CHATROOM:                      #返回群聊列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid like '%%@chatroom'")
+        rows = rows + cur.fetchall()
+    if contact_type & CONTACT_TYPE_OFFICAL:                       #返回公众号列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid like 'gh_%%'")
+        rows = rows + cur.fetchall()
+    if contact_type & CONTACT_TYPE_BLACKLIST:                     #返回黑名单列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 8)")
+        rows = rows + cur.fetchall()
+    if contact_type & CONTACT_TYPE_DELETED:                       #返回已删除好友列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 1) = 0")
+        rows = rows + cur.fetchall()
+    return rows
+
+            

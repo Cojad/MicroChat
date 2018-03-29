@@ -95,7 +95,7 @@ message contact_info
 	optional int32  sex 		= 5;						//性别：0=>未知,1=>男,2=>女
 	optional string tag6    	= 6;
 	optional int32  tag7  		= 7;
-	optional int32  tag8 		= 8;						//todo
+	optional int32  type 		= 8;						//好友状态:11=>拉黑 
 	optional int32  tag9 		= 9;
 	message BeiZhu
 	{
@@ -429,5 +429,5 @@ message new_send_app_msg_resp
 	optional string client_id				= 6;
 	optional int32 utc						= 7;
 	optional int32 type						= 8;
-	optional int32 svrid					= 9;
+	optional int64 svrid					= 9;
 }

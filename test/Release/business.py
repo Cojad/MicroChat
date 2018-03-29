@@ -249,14 +249,19 @@ def new_init_buf2resp(buf):
         elif 2 == res.tag7[i].type:                         #好友列表
             friend = mm_pb2.contact_info()
             friend.ParseFromString(res.tag7[i].data.data)
+            #过滤系统wxid
+            if friend.wxid.id in define.MM_DEFAULT_WXID:
+                logger.info('更新好友信息:跳过默认wxid[{}]'.format(friend.wxid.id))
+                continue
+            #好友分类
             if friend.wxid.id.endswith('@chatroom'):        #群聊
                 logger.info('更新好友信息:群聊名:{} 群聊wxid:{} chatroom_serverVer:{} chatroom_max_member:{} 群主:{} 群成员数量:{}'.format(friend.nickname.name,friend.wxid.id,friend.chatroom_serverVer,friend.chatroom_max_member,friend.chatroomOwnerWxid,friend.group_member_list.cnt))
             elif friend.wxid.id.startswith('gh_'):          #公众号
                 logger.info('更新好友信息:公众号:{} 公众号wxid:{} alias:{} 注册主体:{}'.format(friend.nickname.name,friend.wxid.id,friend.alias,friend.register_body if friend.register_body_type == 24 else '个人'))
             else:                                           #好友
-                logger.info('更新好友信息:好友:{} 备注名:{} wxid:{} alias:{} 性别:{} 好友来源:{} 个性签名:{}'.format(friend.nickname.name,friend.remark_name.name,friend.wxid.id,friend.alias,friend.sex,Util.get_way(friend.src),friend.qianming))
+                logger.info('更新好友信息:昵称:{} 备注名:{} wxid:{} alias:{} 性别:{} 好友来源:{} 个性签名:{}'.format(friend.nickname.name,friend.remark_name.name,friend.wxid.id,friend.alias,friend.sex,Util.get_way(friend.src),friend.qianming))
             #将好友信息存入数据库
-            Util.insert_contact_info_to_db(friend.wxid.id,friend.nickname.name,friend.remark_name.name,friend.alias,friend.avatar_big,friend.v1_name,friend.sex,friend.country,friend.sheng,friend.shi,friend.qianming,friend.register_body,friend.src,friend.chatroomOwnerWxid,friend.chatroom_serverVer,friend.chatroom_max_member,friend.group_member_list.cnt)
+            Util.insert_contact_info_to_db(friend.wxid.id,friend.nickname.name,friend.remark_name.name,friend.alias,friend.avatar_big,friend.v1_name,friend.type,friend.sex,friend.country,friend.sheng,friend.shi,friend.qianming,friend.register_body,friend.src,friend.chatroomOwnerWxid,friend.chatroom_serverVer,friend.chatroom_max_member,friend.group_member_list.cnt)
     return (res.continue_flag,res.sync_key_cur,res.sync_key_max)
 
 #同步消息组包函数
@@ -339,7 +344,8 @@ def new_send_msg_buf2resp(buf):
         logger.info('消息发送失败,错误码:{}'.format(res.res.code))       #-44被删好友,-22被拉黑;具体提示系统会发type=10000的通知
     else:
         logger.debug('消息发送成功,svrid:{}'.format(res.res.svrid))
-    return res.res.code
+
+    return (res.res.code,res.res.svrid)
 
 #分享链接组包函数
 def send_app_msg_req2buf(wxid,title,des,link_url,thumb_url):
@@ -373,7 +379,7 @@ def send_app_msg_req2buf(wxid,title,des,link_url,thumb_url):
         tag10 = 0,
     )
      #组包
-    return pack(req.SerializeToString(),222)
+    return (pack(req.SerializeToString(),222),req.info.content)
 
 #分享链接解包函数
 def send_app_msg_buf2resp(buf):
@@ -381,4 +387,4 @@ def send_app_msg_buf2resp(buf):
     res = mm_pb2.new_send_app_msg_resp()
     res.ParseFromString(UnPack(buf))
     logger.debug('分享链接发送结果:{},svrid:{}'.format(res.tag1.len,res.svrid))
-    return res.tag1.len
+    return (res.tag1.len,res.svrid)
