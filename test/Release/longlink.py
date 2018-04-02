@@ -50,7 +50,7 @@ def pack(cmd_id, buf = b''):
     header = bytearray(0)
     header += struct.pack(">I",len(buf)+16)             #封包总长度(含包头) 4字节
     header += b'\x00\x10'                               #包头长度 2字节 固定00 10(包头长16字节)
-    header += b'\x00\x01'                               #协议版本 固定00 01
+    header += b'\x00\x01'                               #协议版本 2字节 固定00 01
     header += struct.pack(">I",cmd_id)                  #cmd_id 4字节  不同cgi对应不同cmd_id
     if CMDID_NOOP_REQ == cmd_id:                        
         header += struct.pack(">I",HEARTBEAT_SEQ)       #心跳包
@@ -94,7 +94,12 @@ def unpack(buf):
                 elif CMDID_MANUALAUTH_REQ == cmd_id:            #登录响应        
                     if business.login_buf2Resp(buf[16:len_ack],login_aes_key):
                         raise RuntimeError('登录失败!')          #登录失败
+                    else:
+                        #登录成功,测试发送消息接口
+                        #interface.new_send_msg('weixin','Hello weixin!'.encode(encoding="utf-8"))
+                        pass
             return (UNPACK_OK,buf[len_ack:])
+
 
     return (UNPACK_OK,b'')
 
@@ -103,8 +108,7 @@ def send_heartbeat():
     #判断是否需要发送心跳包
     if (Util.get_utc() - last_heartbeat_time) > HEARTBEAT_TIMEOUT:
         #长链接发包
-        send_data = pack(CMDID_NOOP_REQ)
-        longlink.send(send_data)
+        longlink.send(pack(CMDID_NOOP_REQ))
         #记录本次发送心跳时间
         last_heartbeat_time = Util.get_utc()
         return True
@@ -126,8 +130,7 @@ def run(name,password):
     #登录
     global login_aes_key
     (login_buf,login_aes_key) = business.login_req2buf(name,password)
-    send_data = pack(CMDID_MANUALAUTH_REQ,login_buf)
-    longlink.send(send_data)
+    longlink.send(pack(CMDID_MANUALAUTH_REQ,login_buf))
 
     #死循环recv
     recv_data = b''
@@ -144,7 +147,6 @@ def run(name,password):
         logger.debug('收到数据:{}'.format(Util.b2hex(recv_data)))
         (ret,buf) = unpack(recv_data)
         if UNPACK_OK == ret:
-            (ret,buf) = unpack(buf)
             while UNPACK_OK == ret:
                 (ret,buf) = unpack(buf)
             recv_data = buf

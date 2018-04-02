@@ -30,6 +30,14 @@ headers = {
             "User-Agent": "MicroMessenger Client"
 }
 
+#好友类型
+CONTACT_TYPE_ALL = 0xFFFF                   #所有好友
+CONTACT_TYPE_FRIEND = 1                     #朋友 
+CONTACT_TYPE_CHATROOM = 2                   #群聊
+CONTACT_TYPE_OFFICAL = 4                    #公众号
+CONTACT_TYPE_BLACKLIST = 8                  #黑名单中的好友
+CONTACT_TYPE_DELETED = 16                   #已删除的好友
+
 #长短链接默认地址;调用GetDNS()接口后会存放服务器解析的长短链接ip
 ip = {'longip':'long.weixin.qq.com', 'shortip':'short.weixin.qq.com'}
 
@@ -126,78 +134,21 @@ def mmPost(cgi,data):
     conn.close()
     return response
 
-#解包
-def UnPack(src,key = b''):
-    global cookie
-    if len(src) < 0x20:
-        raise RuntimeError('Unpack Error!Please check mm protocol!')     #协议需要更新
-        return b''
-    if not key:
-        key = sessionKey
-    #解析包头   
-    nCur= 0
-    if src[nCur] == struct.unpack('>B',b'\xbf')[0]:
-        nCur += 1                                                         #跳过协议标志位
-    nLenHeader = src[nCur] >> 2                                           #包头长度
-    bUseCompressed = (src[nCur] & 0x3 == 1)                               #包体是否使用压缩算法:01使用,02不使用
-    nCur += 1
-    nDecryptType = src[nCur] >> 4                                         #解密算法(固定为AES解密): 05 aes解密 / 07 rsa解密
-    nLenCookie = src[nCur] & 0xf                                          #cookie长度
-    nCur += 1
-    nCur += 4                                                             #服务器版本(当前固定返回4字节0)
-    uin= struct.unpack('>i',src[nCur:nCur+4])[0]                          #uin
-    nCur += 4
-    cookie_temp = src[nCur:nCur+nLenCookie]                               #cookie
-    if cookie_temp and not(cookie_temp == cookie):
-        cookie = cookie_temp                                              #刷新cookie
-    nCur += nLenCookie
-    (nCgi,nCur) = decoder._DecodeVarint(src,nCur)                         #cgi type
-    (nLenProtobuf,nCur) = decoder._DecodeVarint(src,nCur)                 #压缩前protobuf长度
-    (nLenCompressed,nCur) = decoder._DecodeVarint(src,nCur)               #压缩后protobuf长度
-    logger.debug('包头长度:{}\n是否使用压缩算法:{}\n解密算法:{}\ncookie长度:{}\nuin:{}\ncookie:{}\ncgi type:{}\nprotobuf长度:{}\n压缩后protobuf长度:{}'.format(nLenHeader, bUseCompressed, nDecryptType, nLenCookie, uin, str(cookie), nCgi, nLenProtobuf, nLenCompressed))
-    #对包体aes解密解压缩
-    body = src[nLenHeader:]                                               #取包体数据
-    if bUseCompressed:
-        protobufData = decompress_and_aesDecrypt(body,key)
+#HTTP短链接发包
+def post(host,api,data,head=''):
+    conn = http.client.HTTPConnection(host, timeout=2)
+    if head:
+        conn.request("POST",api,data,head)
     else:
-        protobufData = aesDecrypt(body,key)
-    logger.debug('解密后数据:%s' % str(protobufData))
-    return protobufData
-
-#组包(压缩加密+封包),参数:protobuf序列化后数据,cgi类型,是否使用压缩算法
-def pack(src,cgi_type,use_compress = 0):
-    #必要参数合法性判定
-    if not cookie or not uin or not sessionKey:
-        return b''
-    #压缩加密
-    len_proto_compressed = len(src)
-    if use_compress:
-        (body,len_proto_compressed) = compress_and_aes(src,sessionKey)
-    else:
-        body = aes(src,sessionKey)
-    logger.debug("cgi:{},protobuf数据:{}\n加密后数据:{}".format(cgi_type,b2hex(src),b2hex(body))) 
-    #封包包头
-    header = bytearray(0)
-    header += b'\xbf'                                                               #标志位(可忽略该字节)
-    header += bytes([0])                                                            #最后2bit：02--包体不使用压缩算法;前6bit:包头长度,最后计算                                       #
-    header += bytes([((0x5<<4) + 0xf)])                                             #05:AES加密算法  0xf:cookie长度(默认使用15字节长的cookie)
-    header += struct.pack(">I",define.__CLIENT_VERSION__)                           #客户端版本号 网络字节序
-    header += struct.pack(">i",uin)                                                 #uin
-    header += cookie                                                                #coockie
-    header += encoder._VarintBytes(cgi_type)                                        #cgi type
-    header += encoder._VarintBytes(len(src))                                        #body proto压缩前长度
-    header += encoder._VarintBytes(len_proto_compressed)                            #body proto压缩后长度
-    header += bytes([0]*15)                                                         #3个未知变长整数参数,共15字节
-    header[1] = (len(header)<<2) + 2                                                #包头长度
-    logger.debug("包头数据:{}".format(b2hex(header)))
-    #组包
-    senddata = header + body
-    return senddata
+        conn.request("POST",api,data)
+    response = conn.getresponse().read()
+    conn.close()
+    return response
 
 #退出程序
 def ExitProcess():
-    os.system("pause")
     logger.info('===========bye===========')
+    os.system("pause")
     sys.exit()
 
 #使用IE浏览器访问网页(阻塞)
@@ -264,6 +215,8 @@ def init_db():
     cur = conn.cursor()
     #建消息表
     cur.execute('create table if not exists msg(svrid bigint unique,utc integer,createtime varchar(1024),fromWxid varchar(1024),toWxid varchar(1024),type integer,content text(65535))')
+    #建联系人表
+    cur.execute('create table if not exists contact(wxid varchar(1024) unique,nick_name varchar(1024),remark_name varchar(1024),alias varchar(1024),avatar_big varchar(1024),v1_name varchar(1024),type integer default(0),sex integer,country varchar(1024),sheng varchar(1024),shi varchar(1024),qianming varchar(2048),register_body varchar(1024),src integer,chatroom_owner varchar(1024),chatroom_serverVer integer,chatroom_max_member integer,chatroom_member_cnt integer)')
     #建sync key表
     cur.execute('create table if not exists synckey(key varchar(4096))')
     return
@@ -291,9 +244,22 @@ def insert_msg_to_db(svrid,utc,from_wxid,to_wxid,type,content):
     try:
         cur.execute("insert into msg(svrid,utc,createtime,fromWxid,toWxid,type,content) values('{}','{}','{}','{}','{}','{}','{}')".format(svrid,utc,utc_to_local_time(utc),from_wxid,to_wxid,type,content))
         conn.commit()
-    except:
-        logger.info('insert_msg_to_db error!')
-    return    
+    except Exception as e:
+        logger.info('insert_msg_to_db error:{}'.format(str(e)))
+    return
+
+#保存/刷新好友消息
+def insert_contact_info_to_db(wxid,nick_name,remark_name,alias,avatar_big,v1_name,type,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt):
+    cur = conn.cursor()
+    try:
+        #先删除旧的信息
+        cur.execute("delete from contact where wxid = '{}'".format(wxid))
+        #插入最新联系人数据
+        cur.execute("insert into contact(wxid,nick_name,remark_name,alias,avatar_big,v1_name,type,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt) values('{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(wxid,nick_name,remark_name,alias,avatar_big,v1_name,type,sex,country,sheng,shi,qianming,register_body,src,chatroom_owner,chatroom_serverVer,chatroom_max_member,chatroom_member_cnt))
+        conn.commit()
+    except Exception as e:
+        logger.info('insert_contact_info_to_db error:{}'.format(str(e)))
+    return
 
 #utc转本地时间
 def utc_to_local_time(utc):
@@ -302,3 +268,57 @@ def utc_to_local_time(utc):
 #获取本地时间
 def get_utc():
     return int(time.time())
+
+#str转bytes
+str2bytes = lambda s : bytes(s, encoding = "utf8")
+
+#获取添加好友方式
+def get_way(src):
+    if src in define.WAY.keys() or (src - 1000000) in define.WAY.keys():
+        if src > 1000000:
+            return '对方通过' + define.WAY[src-1000000] + '添加'
+        elif src:
+            return '通过' + define.WAY[src] + '添加'
+    return define.WAY[0]
+
+#获取好友类型:
+def get_frient_type(wxid):    
+    cur = conn.cursor()
+    cur.execute("select type from contact where wxid = '{}'".format(wxid))
+    row = cur.fetchone()
+    if row:
+        return row[0]
+    else:
+        return 0
+
+#好友是否已删除
+def is_deleted(type):
+    #type的最后一bit是0表示已被删除
+    return 0 == (type & 1)
+
+#好友是否在黑名单中
+def is_in_blacklist(type):
+    return (type & (1<<3))
+
+#获取好友列表wxid,昵称,备注,alias,v1_name,头像
+def get_contact(contact_type):    
+    cur = conn.cursor()
+    rows = []
+    if contact_type & CONTACT_TYPE_FRIEND:                        #返回好友列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 8) = 0")
+        rows = rows + cur.fetchall()
+    if contact_type & CONTACT_TYPE_CHATROOM:                      #返回群聊列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid like '%%@chatroom'")
+        rows = rows + cur.fetchall()
+    if contact_type & CONTACT_TYPE_OFFICAL:                       #返回公众号列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid like 'gh_%%'")
+        rows = rows + cur.fetchall()
+    if contact_type & CONTACT_TYPE_BLACKLIST:                     #返回黑名单列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 8)")
+        rows = rows + cur.fetchall()
+    if contact_type & CONTACT_TYPE_DELETED:                       #返回已删除好友列表
+        cur.execute("select wxid,nick_name,remark_name,alias,v1_name,avatar_big from contact where wxid not like '%%@chatroom' and wxid not like 'gh_%%' and (type & 1) = 0")
+        rows = rows + cur.fetchall()
+    return rows
+
+            
